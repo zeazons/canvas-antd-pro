@@ -17,7 +17,7 @@ const Model = {
       }); // Login successfully
 
       if (response.status === 'ok') {
-        message.success('登录成功！');
+        message.success('login successful!');
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;

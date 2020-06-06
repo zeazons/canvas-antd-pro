@@ -3,7 +3,7 @@ const titles = [
   'Alipay',
   'Angular',
   'Ant Design',
-  'Ant Design Pro',
+  'Canvas',
   'Bootstrap',
   'React',
   'Vue',
@@ -13,7 +13,7 @@ const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
   'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png', // Ant Design
-  'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Ant Design Pro
+  'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Canvas
   'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png', // Bootstrap
   'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
   'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
@@ -50,9 +50,7 @@ function fakeList(count) {
 
   for (let i = 0; i < count; i += 1) {
     list.push({
-      id: `fake-list-${Math.random()
-        .toString(36)
-        .slice(2, 6)}${i}`,
+      id: `fake-list-${Math.random().toString(36).slice(2, 6)}${i}`,
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],

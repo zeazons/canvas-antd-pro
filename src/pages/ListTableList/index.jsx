@@ -11,7 +11,7 @@ import { queryRule, updateRule, addRule, removeRule } from './service';
  * @param fields
  */
 
-const handleAdd = async fields => {
+const handleAdd = async (fields) => {
   const hide = message.loading('正在添加');
 
   try {
@@ -30,7 +30,7 @@ const handleAdd = async fields => {
  * @param fields
  */
 
-const handleUpdate = async fields => {
+const handleUpdate = async (fields) => {
   const hide = message.loading('正在配置');
 
   try {
@@ -53,13 +53,13 @@ const handleUpdate = async fields => {
  * @param selectedRows
  */
 
-const handleRemove = async selectedRows => {
+const handleRemove = async (selectedRows) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
 
   try {
     await removeRule({
-      key: selectedRows.map(row => row.key),
+      key: selectedRows.map((row) => row.key),
     });
     hide();
     message.success('删除成功，即将刷新');
@@ -98,7 +98,7 @@ const TableList = () => {
       dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
-      renderText: val => `${val} 万`,
+      renderText: (val) => `${val} 万`,
     },
     {
       title: '状态',
@@ -187,7 +187,7 @@ const TableList = () => {
             <Dropdown
               overlay={
                 <Menu
-                  onClick={async e => {
+                  onClick={async (e) => {
                     if (e.key === 'remove') {
                       await handleRemove(selectedRows);
                       action.reload();
@@ -208,7 +208,7 @@ const TableList = () => {
         ]}
         tableAlertRender={({ selectedRowKeys, selectedRows }) => (
           <div>
-            已选择{' '}
+            Select{' '}
             <a
               style={{
                 fontWeight: 600,
@@ -216,19 +216,19 @@ const TableList = () => {
             >
               {selectedRowKeys.length}
             </a>{' '}
-            项&nbsp;&nbsp;
+            item(s)&nbsp;&nbsp;
             <span>
-              服务调用次数总计 {selectedRows.reduce((pre, item) => pre + item.callNo, 0)} 万
+              Total {selectedRows.reduce((pre, item) => pre + item.callNo, 0)} Ten thousand
             </span>
           </div>
         )}
-        request={params => queryRule(params)}
+        request={(params) => queryRule(params)}
         columns={columns}
         rowSelection={{}}
       />
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
         <ProTable
-          onSubmit={async value => {
+          onSubmit={async (value) => {
             const success = await handleAdd(value);
 
             if (success) {
@@ -247,7 +247,7 @@ const TableList = () => {
       </CreateForm>
       {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
-          onSubmit={async value => {
+          onSubmit={async (value) => {
             const success = await handleUpdate(value);
 
             if (success) {

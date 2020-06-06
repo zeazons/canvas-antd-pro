@@ -139,7 +139,7 @@ const titles = [
   'Alipay',
   'Angular',
   'Ant Design',
-  'Ant Design Pro',
+  'Canvas',
   'Bootstrap',
   'React',
   'Vue',
@@ -149,7 +149,7 @@ const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
   'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png', // Ant Design
-  'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Ant Design Pro
+  'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Canvas
   'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png', // Bootstrap
   'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
   'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
@@ -363,8 +363,8 @@ const radarTitleMap = {
   contribute: '贡献',
   hot: '热度',
 };
-radarOriginData.forEach(item => {
-  Object.keys(item).forEach(key => {
+radarOriginData.forEach((item) => {
+  Object.keys(item).forEach((key) => {
     if (key !== 'name') {
       radarData.push({
         name: item.name,
@@ -390,7 +390,7 @@ export default {
     radarData,
   },
   'GET  /api/currentUser': {
-    name: 'Serati Ma',
+    name: 'Ronaldo',
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'antdesign@alipay.com',

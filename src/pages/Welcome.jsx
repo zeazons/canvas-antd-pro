@@ -41,7 +41,7 @@ export default () => (
           rel="noopener noreferrer"
           href="https://pro.ant.design/docs/available-script#npm-run-fetchblocks"
         >
-          获取全部区块
+          Get all blocks
         </a>
       </Typography.Text>
       <CodePreview> npm run fetch:blocks</CodePreview>

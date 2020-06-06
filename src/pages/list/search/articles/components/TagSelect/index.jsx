@@ -10,7 +10,7 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
   <CheckableTag
     checked={!!checked}
     key={value}
-    onChange={state => onChange && onChange(value, state)}
+    onChange={(state) => onChange && onChange(value, state)}
   >
     {children}
   </CheckableTag>
@@ -22,9 +22,9 @@ class TagSelect extends Component {
   static defaultProps = {
     hideCheckAll: false,
     actionsText: {
-      expandText: '展开',
-      collapseText: '收起',
-      selectAllText: '全部',
+      expandText: 'Expand',
+      collapseText: 'Collapse',
+      selectAllText: 'All',
     },
   };
 
@@ -48,7 +48,7 @@ class TagSelect extends Component {
     };
   }
 
-  onChange = value => {
+  onChange = (value) => {
     const { onChange } = this.props;
 
     if (!('value' in this.props)) {
@@ -62,7 +62,7 @@ class TagSelect extends Component {
     }
   };
 
-  onSelectAll = checked => {
+  onSelectAll = (checked) => {
     let checkedTags = [];
 
     if (checked) {
@@ -76,8 +76,8 @@ class TagSelect extends Component {
     const { children } = this.props;
     const childrenArray = React.Children.toArray(children);
     const checkedTags = childrenArray
-      .filter(child => this.isTagSelectOption(child))
-      .map(child => child.props.value);
+      .filter((child) => this.isTagSelectOption(child))
+      .map((child) => child.props.value);
     return checkedTags || [];
   }
 
@@ -102,7 +102,7 @@ class TagSelect extends Component {
     });
   };
 
-  isTagSelectOption = node =>
+  isTagSelectOption = (node) =>
     node &&
     node.type &&
     (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
@@ -111,7 +111,7 @@ class TagSelect extends Component {
     const { value, expand } = this.state;
     const { children, hideCheckAll, className, style, expandable, actionsText = {} } = this.props;
     const checkedAll = this.getAllTags().length === value.length;
-    const { expandText = '展开', collapseText = '收起', selectAllText = '全部' } = actionsText;
+    const { expandText = 'Expand', collapseText = 'Collapse', selectAllText = 'All' } = actionsText;
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
       [styles.expanded]: expand,
@@ -125,7 +125,7 @@ class TagSelect extends Component {
         )}
         {value &&
           children &&
-          React.Children.map(children, child => {
+          React.Children.map(children, (child) => {
             if (this.isTagSelectOption(child)) {
               return React.cloneElement(child, {
                 key: `tag-select-${child.props.value}`,

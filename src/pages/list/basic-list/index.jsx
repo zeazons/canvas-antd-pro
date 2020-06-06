@@ -56,7 +56,7 @@ const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
   </div>
 );
 
-export const BasicList = props => {
+export const BasicList = (props) => {
   const addBtn = useRef(null);
   const {
     loading,
@@ -86,12 +86,12 @@ export const BasicList = props => {
     setCurrent(undefined);
   };
 
-  const showEditModal = item => {
+  const showEditModal = (item) => {
     setVisible(true);
     setCurrent(item);
   };
 
-  const deleteItem = id => {
+  const deleteItem = (id) => {
     dispatch({
       type: 'listAndbasicList/submit',
       payload: {
@@ -104,10 +104,10 @@ export const BasicList = props => {
     if (key === 'edit') showEditModal(currentItem);
     else if (key === 'delete') {
       Modal.confirm({
-        title: '删除任务',
-        content: '确定删除该任务吗？',
-        okText: '确认',
-        cancelText: '取消',
+        title: 'Delete task',
+        content: 'Are you sure you want to delete this task?',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: () => deleteItem(currentItem.id),
       });
     }
@@ -116,7 +116,7 @@ export const BasicList = props => {
   const extraContent = (
     <div className={styles.extraContent}>
       <RadioGroup defaultValue="all">
-        <RadioButton value="all">全部</RadioButton>
+        <RadioButton value="all">All</RadioButton>
         <RadioButton value="progress">进行中</RadioButton>
         <RadioButton value="waiting">等待中</RadioButton>
       </RadioGroup>
@@ -158,7 +158,7 @@ export const BasicList = props => {
     setVisible(false);
   };
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     const id = current ? current.id : '';
     setAddBtnblur();
     setDone(true);
@@ -178,13 +178,13 @@ export const BasicList = props => {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="我的待办" value="8个任务" bordered />
+                <Info title="To-do" value="8 tasks" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周任务平均处理时间" value="32分钟" bordered />
+                <Info title="Average task processing time this week" value="32 minutes" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周完成任务数" value="24个任务" />
+                <Info title="Tasks completed this week" value="24 missions" />
               </Col>
             </Row>
           </Card>
@@ -220,12 +220,12 @@ export const BasicList = props => {
               loading={loading}
               pagination={paginationProps}
               dataSource={list}
-              renderItem={item => (
+              renderItem={(item) => (
                 <List.Item
                   actions={[
                     <a
                       key="edit"
-                      onClick={e => {
+                      onClick={(e) => {
                         e.preventDefault();
                         showEditModal(item);
                       }}

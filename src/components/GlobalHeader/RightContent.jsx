@@ -14,7 +14,7 @@ const ENVTagColor = {
   pre: '#87d068',
 };
 
-const GlobalHeaderRight = props => {
+const GlobalHeaderRight = (props) => {
   const { theme, layout } = props;
   let className = styles.right;
 
@@ -26,7 +26,7 @@ const GlobalHeaderRight = props => {
     <div className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
+        placeholder="Search"
         defaultValue="umi ui"
         options={[
           {
@@ -49,7 +49,7 @@ const GlobalHeaderRight = props => {
         //   //console.log('input', value);
         // }}
       />
-      <Tooltip title="使用文档">
+      <Tooltip title="Help">
         <a
           target="_blank"
           href="https://pro.ant.design/docs/getting-started"

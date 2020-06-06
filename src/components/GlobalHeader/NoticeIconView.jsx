@@ -17,7 +17,7 @@ class GlobalHeaderRight extends Component {
     }
   }
 
-  changeReadState = clickedItem => {
+  changeReadState = (clickedItem) => {
     const { id } = clickedItem;
     const { dispatch } = this.props;
 
@@ -31,7 +31,7 @@ class GlobalHeaderRight extends Component {
 
   handleNoticeClear = (title, key) => {
     const { dispatch } = this.props;
-    message.success(`${'清空了'} ${title}`);
+    message.success(`${'Cleared'} ${title}`);
 
     if (dispatch) {
       dispatch({
@@ -48,7 +48,7 @@ class GlobalHeaderRight extends Component {
       return {};
     }
 
-    const newNotices = notices.map(notice => {
+    const newNotices = notices.map((notice) => {
       const newNotice = { ...notice };
 
       if (newNotice.datetime) {
@@ -83,9 +83,9 @@ class GlobalHeaderRight extends Component {
     return groupBy(newNotices, 'type');
   };
 
-  getUnreadData = noticeData => {
+  getUnreadData = (noticeData) => {
     const unreadMsg = {};
-    Object.keys(noticeData).forEach(key => {
+    Object.keys(noticeData).forEach((key) => {
       const value = noticeData[key];
 
       if (!unreadMsg[key]) {
@@ -93,7 +93,7 @@ class GlobalHeaderRight extends Component {
       }
 
       if (Array.isArray(value)) {
-        unreadMsg[key] = value.filter(item => !item.read).length;
+        unreadMsg[key] = value.filter((item) => !item.read).length;
       }
     });
     return unreadMsg;
@@ -107,12 +107,12 @@ class GlobalHeaderRight extends Component {
       <NoticeIcon
         className={styles.action}
         count={currentUser && currentUser.unreadCount}
-        onItemClick={item => {
+        onItemClick={(item) => {
           this.changeReadState(item);
         }}
         loading={fetchingNotices}
-        clearText="清空"
-        viewMoreText="查看更多"
+        clearText="Clear"
+        viewMoreText="View more"
         onClear={this.handleNoticeClear}
         onPopupVisibleChange={onNoticeVisibleChange}
         onViewMore={() => message.info('Click on view more')}
@@ -122,22 +122,22 @@ class GlobalHeaderRight extends Component {
           tabKey="notification"
           count={unreadMsg.notification}
           list={noticeData.notification}
-          title="通知"
-          emptyText="你已查看所有通知"
+          title="Notification"
+          emptyText="You have viewed all notifications."
           showViewMore
         />
         <NoticeIcon.Tab
           tabKey="message"
           count={unreadMsg.message}
           list={noticeData.message}
-          title="消息"
-          emptyText="您已读完所有消息"
+          title="Message"
+          emptyText="You have viewed all messsages."
           showViewMore
         />
         <NoticeIcon.Tab
           tabKey="event"
-          title="待办"
-          emptyText="你已完成所有待办"
+          title="Event"
+          emptyText="You have viewed all events."
           count={unreadMsg.event}
           list={noticeData.event}
           showViewMore

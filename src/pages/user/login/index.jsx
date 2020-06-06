@@ -18,13 +18,13 @@ const LoginMessage = ({ content }) => (
   />
 );
 
-const Login = props => {
+const Login = (props) => {
   const { userAndlogin = {}, submitting } = props;
   const { status, type: loginType } = userAndlogin;
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState('account');
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     const { dispatch } = props;
     dispatch({
       type: 'userAndlogin/login',
@@ -94,7 +94,7 @@ const Login = props => {
           />
         </Tab>
         <div>
-          <Checkbox checked={autoLogin} onChange={e => setAutoLogin(e.target.checked)}>
+          <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
             自动登录
           </Checkbox>
           <a
