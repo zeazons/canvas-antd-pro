@@ -53,20 +53,38 @@ export default defineConfig({
               path: '/user/login',
               component: './user/login',
             },
-            {
-              name: 'register-result',
-              icon: 'smile',
-              path: '/user/register-result',
-              component: './user/register-result',
-            },
-            {
-              name: 'register',
-              icon: 'smile',
-              path: '/user/register',
-              component: './user/register',
-            },
+            // {
+            //   name: 'register-result',
+            //   icon: 'smile',
+            //   path: '/user/register-result',
+            //   component: './user/register-result',
+            // },
+            // {
+            //   name: 'register',
+            //   icon: 'smile',
+            //   path: '/user/register',
+            //   component: './user/register',
+            // },
             {
               component: '404',
+            },
+          ],
+        },
+        {
+          path: '/canvas',
+          component: '../layouts/BlankLayout',
+          Routes: ['src/pages/Authorized'],
+          authority: ['admin', 'user'],
+          routes: [
+            {
+              name: 'canvas',
+              path: '/canvas',
+              component: './404',
+            },
+            {
+              name: 'canvas',
+              path: '/canvas/:id',
+              component: './canvas',
             },
           ],
         },
@@ -76,6 +94,18 @@ export default defineConfig({
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
+            // {
+            //   path: '/canvas',
+            //   icon: 'table',
+            //   name: 'canvas',
+            //   routes: [
+            //     {
+            //       name: 'canvas',
+            //       path: '/canvas/:id',
+            //       component: './Canvas',
+            //     },
+            //   ],
+            // },
             {
               path: '/dashboard',
               name: 'dashboard',

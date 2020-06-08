@@ -27,8 +27,6 @@ const codeMessage = {
  */
 
 export const errorHandler = (error) => {
-  console.log('errorHandler: ', error);
-
   const { response } = error;
 
   if (response && response.status) {
@@ -53,7 +51,7 @@ export const errorHandler = (error) => {
 
 const request = extend({
   // errorHandler,  // Default error handling
-  credentials: 'include', // Whether the default request brings cookies
+  // credentials: 'include', // Whether the default request brings cookies
 });
 
 export default request;

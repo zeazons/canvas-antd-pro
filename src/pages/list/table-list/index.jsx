@@ -149,7 +149,7 @@ const TableList = () => {
         rowKey="key"
         toolBarRender={(action, { selectedRows }) => [
           <Button icon={<PlusOutlined />} type="primary" onClick={() => handleModalVisible(true)}>
-            新建
+            新建 xxxxx
           </Button>,
           selectedRows && selectedRows.length > 0 && (
             <Dropdown
