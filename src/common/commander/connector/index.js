@@ -1,7 +1,7 @@
 import * as ExtractorCommander from '../extractor';
 
 import * as Commander from '..';
-import { default as UmiRequest, errorHandler } from './connectorWorker';
+import { default as UmiRequest, errorHandler } from './worker';
 
 /**
  * This is common request for call api.

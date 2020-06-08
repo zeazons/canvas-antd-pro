@@ -1,7 +1,7 @@
-import * as ActionReaderWorker from './actionReaderWorker';
+import * as Worker from './worker';
 
 export const receive = (key, data) => {
-  const extractor = ActionReaderWorker.execute(key, data);
+  const extractor = Worker.execute(key, data);
 
   return extractor;
 };
