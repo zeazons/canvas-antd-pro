@@ -5,6 +5,8 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
+import * as DefaultFail from '../../defaultFail';
+
 const codeMessage = {
   200: 'The server successfully returned the requested data. ',
   201: 'New or modified data is successful.',
@@ -32,15 +34,20 @@ export const errorHandler = (error) => {
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
-    notification.error({
+
+    const data = {
       message: `Request error ${status}: ${url}`,
-      description: errorText,
-    });
+      desc: errorText,
+    };
+
+    DefaultFail.receive(data);
   } else if (!response) {
-    notification.error({
-      description: 'Your network is abnormal and cannot connect to the server',
-      message: 'Network anomaly',
-    });
+    const data = {
+      message: 'Your network is abnormal and cannot connect to the server',
+      desc: 'Network anomaly',
+    };
+
+    DefaultFail.receive(data);
   }
 
   return response;

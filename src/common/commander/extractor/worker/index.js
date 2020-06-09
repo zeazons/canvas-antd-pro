@@ -1,32 +1,17 @@
 import _ from 'lodash';
+import * as ValidationUtils from '@/common/utils/validationUtils';
 
 export const execute = (key, data) => {
-  console.log('key: ', key);
-  console.log('data: ', data);
-
-  if (_.isEmpty(data)) {
-    throw 'Data is empty!';
+  if (!ValidationUtils.isEmpty(data)) {
+    let actionList = extractData(key, data.result);
+    if (isValidActionList(actionList)) {
+      return actionList;
+    } else {
+      throw 'Action is empty.';
+    }
+  } else {
+    throw 'Can not extract data.';
   }
-
-  return extractData(key, data.result);
-  // let resObj = {};
-  // if (!isEmpty(data)) {
-  //   let actionList = extractData('action', data.result);
-  //   if (isValidActionList(actionList)) {
-  //     actionList['success'] = true;
-  //     resObj = actionList;
-  //   } else {
-  //     resObj = generateExceptionMessage({
-  //       message: ExceptionConstants.MSG_ACTION_IS_EMPTY,
-  //     });
-  //   }
-  // } else {
-  //   resObj = generateExceptionMessage({
-  //     message: ExceptionConstants.MSG_CAN_NOT_EXTRACT_DATA,
-  //   });
-  // }
-
-  // return resObj;
 };
 
 const extractData = (key, data) => {
@@ -34,5 +19,5 @@ const extractData = (key, data) => {
 };
 
 const isValidActionList = (data) => {
-  return !isEmpty(data) && isObject(data);
+  return !ValidationUtils.isEmpty(data) && ValidationUtils.isObject(data);
 };

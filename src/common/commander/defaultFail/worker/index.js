@@ -1,8 +1,8 @@
 import { notification } from 'antd';
 
-export const execute = (message, desc) => {
+export const execute = (data) => {
   notification.error({
-    message: message,
-    description: desc,
+    message: data.message,
+    description: data.desc,
   });
 };

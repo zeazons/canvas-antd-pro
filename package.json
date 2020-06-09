@@ -40,9 +40,15 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^5.0.8",
@@ -64,6 +70,7 @@
     "lodash.isequal": "^4.5.0",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.24.0",
+    "mxgraph-js": "^1.0.1",
     "numeral": "^2.0.6",
     "nzh": "^1.0.3",
     "omit.js": "^1.0.2",
