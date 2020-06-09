@@ -16,20 +16,31 @@ const FlowPanel = forwardRef((props, ref) => {
 
   const [flowState, setFlowState] = useMergeState({
     editor: {},
-    graph: {},
   });
 
   useImperativeHandle(ref, () => ({
     getData() {
       return flowState;
     },
-    setData(data) {
-      setFlowState(data);
+    // setData(data) {
+    //   setFlowState(data);
+    // },
+    readFlow(xmlFlow) {
+      const { editor } = flowState;
+      Events.readFlow(refs.current[0], xmlFlow, editor);
+    },
+    lock(data) {
+      const { editor } = flowState;
+      Events.lock(refs.current[0], data, editor);
     },
   }));
 
   useEffect(() => {
-    Events.loadFlow(refs, setFlowState);
+    const extraParams = {
+      username: 'Ronaldo',
+      canvasId: '250',
+    };
+    Events.initailFlow(refs.current[0], extraParams, setFlowState);
   }, []);
 
   return (

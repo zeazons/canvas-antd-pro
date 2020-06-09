@@ -1,1 +1,1 @@
-export * from '@/pages/canvas/components/FlowPanel/command';
+export * from '@/pages/canvas/components/FlowPanel/worker';
