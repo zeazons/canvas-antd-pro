@@ -1,5 +1,5 @@
-export const lock = (ref, data, editor) => {
+export const lock = (refs, data, editor) => {
   const isReadOnly = data.flow || false;
-  const graph = editor.graph;
+  const { graph } = editor;
   graph.setEnabled(!isReadOnly);
 };

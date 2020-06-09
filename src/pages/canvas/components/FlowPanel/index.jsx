@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
-import { mxGraph, mxClient, mxUtils, mxEvent, mxCompactTreeLayout } from 'mxgraph-js';
 
 import * as Events from './events';
+
+import styles from './assets/less/style.less';
 
 function useMergeState(initialState) {
   const [state, setState] = useState(initialState);
@@ -25,13 +26,13 @@ const FlowPanel = forwardRef((props, ref) => {
     // setData(data) {
     //   setFlowState(data);
     // },
-    readFlow(xmlFlow) {
+    readFlow(data) {
       const { editor } = flowState;
-      Events.readFlow(refs.current[0], xmlFlow, editor);
+      Events.onReadFlow(refs.current[0], data, editor);
     },
     lock(data) {
       const { editor } = flowState;
-      Events.lock(refs.current[0], data, editor);
+      Events.onLock(refs.current[0], data, editor);
     },
   }));
 
@@ -40,12 +41,16 @@ const FlowPanel = forwardRef((props, ref) => {
       username: 'Ronaldo',
       canvasId: '250',
     };
-    Events.initailFlow(refs.current[0], extraParams, setFlowState);
+    Events.onInitailFlow(refs.current[0], extraParams, setFlowState);
   }, []);
 
   return (
-    <div className="flow-container" ref={(el) => (refs.current[0] = el)}>
-      <div className="graph-container" id={id || new Date().getTime().toString()} ref={ref}></div>
+    <div className="flow-container">
+      <div
+        className={styles.graphContainer}
+        id={id || new Date().getTime().toString()}
+        ref={(el) => (refs.current[0] = el)}
+      ></div>
       <div
         id={`${id}OutlineFlow` || `${new Date().getTime().toString()}OutlineFlow`}
         className="outline-container"

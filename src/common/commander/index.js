@@ -6,12 +6,12 @@ import * as DefaultFail from './defaultFail';
 
 import * as Worker from './worker';
 
-export const receive = (data) => {
+export const receive = (refs, data, extraParams, callback) => {
   try {
     const events = ExtractorCommander.receive('action', data);
     const actions = ActionReaderCommander.receive('events', events);
 
-    Worker.execute(actions);
+    Worker.execute(refs, actions, extraParams, callback);
   } catch (err) {
     const data = {
       message: err ? err : err.message,

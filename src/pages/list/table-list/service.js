@@ -1,22 +1,22 @@
-import request from '@/common/commander/connector';
+import connect from '@/common/commander/connector';
 
 export async function queryRule(params) {
-  return request('/api/rule', { method: 'GET', ...params });
+  return connect('/api/rule', { method: 'GET', ...params });
 }
 export async function removeRule(params) {
-  return request('/api/rule', {
+  return connect('/api/rule', {
     method: 'POST',
     data: { ...params, method: 'delete' },
   });
 }
 export async function addRule(params) {
-  return request('/api/rule', {
+  return connect('/api/rule', {
     method: 'POST',
     data: { ...params, method: 'post' },
   });
 }
 export async function updateRule(params) {
-  return request('/api/rule', {
+  return connect('/api/rule', {
     method: 'POST',
     data: { ...params, method: 'update' },
   });

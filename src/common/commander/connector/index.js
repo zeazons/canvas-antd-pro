@@ -3,14 +3,15 @@ import * as ExtractorCommander from '../extractor';
 import * as Commander from '..';
 import { default as UmiRequest, errorHandler } from './worker';
 
-/**
- * This is common request for call api.
- * @param {string} url
- * @param {Object} options
- * @callback onSuccess response - The callback that handles the response.
- * @callback onError error - The callback that handles the error.
- */
-const request = (url, options, onSuccess, onError) => {
+// /**
+//  * This is common request for call api.
+//  * @param {string} url
+//  * @param {Object} options
+//  * @callback onSuccess response - The callback that handles the response.
+//  * @callback onError error - The callback that handles the error.
+//  */
+const connect = (refs, requestData, extraParams, callback) => {
+  let { url, options, onSuccess, onError } = requestData;
   let { method } = options;
 
   if (typeof method === 'undefined') {
@@ -34,7 +35,8 @@ const request = (url, options, onSuccess, onError) => {
       } else {
         // console.log('| === Extract Data === |');
         // console.log('response: ', response);
-        Commander.receive(response);
+        // Commander.receive(response);
+        Commander.receive(refs, response, extraParams, callback);
 
         return response;
       }
@@ -48,4 +50,4 @@ const request = (url, options, onSuccess, onError) => {
     });
 };
 
-export default request;
+export default connect;
