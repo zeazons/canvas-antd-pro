@@ -6,3 +6,5 @@ export * from './canvas/discardCanvas';
 export * from './canvas/closeCanvas';
 export * from './canvas/undoCanvas';
 export * from './canvas/redoCanvas';
+
+export * from './widgets/loadWidgets';

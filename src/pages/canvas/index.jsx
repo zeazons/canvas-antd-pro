@@ -9,6 +9,8 @@ import WidgetsPanel from './components/WidgetsPanel';
 import ToolbarPanel from './components/ToolbarPanel';
 import PropertiesPanel from './components/PropertiesPanel';
 
+import * as Events from './events';
+
 import styles from './assets/less/style.less';
 
 const Canvas = forwardRef((props, ref) => {
@@ -116,7 +118,11 @@ const Canvas = forwardRef((props, ref) => {
       </Button>
 
       <FlowPanel ref={(el) => (refs.current[0] = el)} />
-      <WidgetsPanel className={styles.canvasWidgets} ref={(el) => (refs.current[1] = el)} />
+      <WidgetsPanel
+        className={styles.canvasWidgets}
+        events={Events}
+        ref={(el) => (refs.current[1] = el)}
+      />
       <ToolbarPanel
         className={styles.canvasToolbar}
         onToolButtonClick={onToolButtonClick}

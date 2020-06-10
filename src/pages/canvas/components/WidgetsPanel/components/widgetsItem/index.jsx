@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Icon from "./icon";
-import Description from "./description";
+import { Row, Col } from 'antd';
+
+import Icon from './icon';
+import Description from './description';
+
+import styles from '../../assets/less/style.less';
 
 const WidgetsItem = React.forwardRef(({ data, editor } = props, ref) => (
   <div className="card w-100" ref={ref}>
@@ -11,19 +15,15 @@ const WidgetsItem = React.forwardRef(({ data, editor } = props, ref) => (
         // console.log("item: ", item);
 
         return (
-          <div
-            className="row no-gutters align-items-center border widget-item"
-            key={item.nodeId}
-          >
-            <div className="col-auto">
-              {/* <Icon src={data.icon} data={data} editor={editor} /> */}
+          <Row justify="start" align="middle" gutter={16} className={styles.widgetItem}>
+            <Col>
               <Icon src={item.icon} data={item} editor={editor} />
-            </div>
-            <div className="col align-items-center">
-              {/* <Description title={data.nodeName} /> */}
+            </Col>
+
+            <Col>
               <Description title={item.nodeName} />
-            </div>
-          </div>
+            </Col>
+          </Row>
         );
       })}
   </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Space } from 'antd';
+import { Col, Button, Space, Divider } from 'antd';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,35 +17,43 @@ const ToolbarRightView = React.forwardRef(({ id, height, onToolButtonClick } = p
     id={id || new Date().getTime().toString()}
     ref={ref}
   >
-    <Space size={8}>
+    <Space size={16}>
       <Col>
         <Button
+          type="text"
           icon={<FontAwesomeIcon icon={faBorderNone} />}
           onClick={(event) => {
             onToolButtonClick(event, 'toggleFlowGuideline');
           }}
         />
       </Col>
+
+      <Divider type="vertical" />
+
       <Col>
         <Button
+          type="text"
           icon={<FontAwesomeIcon icon={faSearchMinus} />}
           onClick={(event) => {
             onToolButtonClick(event, 'zoomOutFlow');
           }}
         />
         <Button
+          type="text"
           icon={<FontAwesomeIcon icon={faSearchPlus} />}
           onClick={(event) => {
             onToolButtonClick(event, 'zoomInFlow');
           }}
         />
         <Button
+          type="text"
           icon={<FontAwesomeIcon icon={faCompress} />}
           onClick={(event) => {
             onToolButtonClick(event, 'zoomActualSize');
           }}
         />
         <Button
+          type="text"
           icon={<FontAwesomeIcon icon={faExpand} />}
           onClick={(event) => {
             onToolButtonClick(event, 'zoomFitSize');

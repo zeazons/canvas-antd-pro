@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
+
+import styles from '../../assets/less/style.less';
 
 const WidgetsList = React.forwardRef((props, ref) => (
-  <div
-    className="widgets-list"
-    ref={ref}
-    style={{ height: `${props.height}px` }}
-  >
+  <div className={styles.widgetsList} ref={ref} style={{ height: `${props.height}px` }}>
     <div
       className="row list-node"
       id={props.id || new Date().getTime().toString()}

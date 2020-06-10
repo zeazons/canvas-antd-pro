@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
-import { Col, Button, Space } from 'antd';
+import { Col, Button, Space, Divider } from 'antd';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -69,35 +69,43 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           }}
         />
 
-        <Space size={8}>
+        <Divider type="vertical" />
+
+        <Space size={16}>
           <Col>
             <Button
+              type="text"
               icon={<FontAwesomeIcon icon={faCheckCircle} />}
               onClick={(event) => {
                 onToolButtonClick(event, 'commitFlow');
               }}
             />
             <Button
+              type="text"
               icon={<FontAwesomeIcon icon={faHistory} />}
               onClick={(event) => {
                 onToolButtonClick(event, 'discardFlow');
               }}
             />
             <Button
+              type="text"
               icon={<FontAwesomeIcon icon={faTimesCircle} />}
               onClick={(event) => {
                 onToolButtonClick(event, 'closeFlow');
               }}
             />
           </Col>
+          <Divider type="vertical" />
           <Col>
             <Button
+              type="text"
               icon={<FontAwesomeIcon icon={faUndoAlt} />}
               onClick={(event) => {
                 onToolButtonClick(event, 'undoFlow');
               }}
             />
             <Button
+              type="text"
               icon={<FontAwesomeIcon icon={faRedoAlt} />}
               onClick={(event) => {
                 onToolButtonClick(event, 'redoFlow');
