@@ -42,6 +42,26 @@ const FlowPanel = forwardRef((props, ref) => {
       const { editor } = flowState;
       Events.onLock(refs.current[0], data, editor);
     },
+    toggleFlowGuideline() {
+      const { editor } = flowState;
+      Events.onToggleFlowGuideline(editor);
+    },
+    zoomOutFlow() {
+      const { editor } = flowState;
+      Events.onZoomOutFlow(editor);
+    },
+    zoomInFlow() {
+      const { editor } = flowState;
+      Events.onZoomInFlow(editor);
+    },
+    zoomActualSize() {
+      const { editor } = flowState;
+      Events.onZoomActualSize(editor);
+    },
+    zoomFitSize() {
+      const { editor } = flowState;
+      Events.onZoomFitSize(editor);
+    },
   }));
 
   useEffect(() => {

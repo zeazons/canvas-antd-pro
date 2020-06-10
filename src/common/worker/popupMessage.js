@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-export const popupMessage = (data) => {
+export const popupMessage = (refs, data) => {
   const { type, message: msgErr } = data;
 
   if (msgErr) {

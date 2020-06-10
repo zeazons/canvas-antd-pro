@@ -22,7 +22,7 @@ const ToolbarRightView = React.forwardRef(({ id, height, onToolButtonClick } = p
         <Button
           icon={<FontAwesomeIcon icon={faBorderNone} />}
           onClick={(event) => {
-            onToolButtonClick(event, 'redoFlow');
+            onToolButtonClick(event, 'toggleFlowGuideline');
           }}
         />
       </Col>

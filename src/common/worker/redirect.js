@@ -1,4 +1,4 @@
-export const redirect = (data) => {
+export const redirect = (refs, data) => {
   const { url } = data;
 
   window.location.replace(url);

@@ -10,9 +10,9 @@ export const execute = (ref, data, extraParams, callback) => {
   });
 };
 
-const popupMessage = (ref, data) => {
-  console.log('popupMessage');
-};
+// const popupMessage = (ref, data) => {
+//   console.log('popupMessage');
+// };
 
 // import _ from "lodash";
 

@@ -1,11 +1,6 @@
 import connectCommander from '@/common/commander/connector';
 
-export async function loadCanvas(refs, params, extraParams, callback) {
-  // return request('canvas/rpc', {
-  //   method: 'POST',
-  //   data: { ...params, method: 'loadCanvas' },
-  // });
-
+export const loadCanvas = async (refs, params, extraParams, callback) => {
   const request = {
     url: 'canvas/rpc',
     options: {
@@ -15,4 +10,4 @@ export async function loadCanvas(refs, params, extraParams, callback) {
   };
 
   return connectCommander(refs, request, extraParams, callback);
-}
+};
