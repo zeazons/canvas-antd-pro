@@ -1,5 +1,3 @@
-import { notification } from 'antd';
-
 import * as ExtractorCommander from './extractor';
 import * as ActionReaderCommander from './actionReader';
 import * as DefaultFail from './defaultFail';
@@ -14,7 +12,7 @@ export const receive = (refs, data, extraParams, callback) => {
     Worker.execute(refs, actions, extraParams, callback);
   } catch (err) {
     const data = {
-      message: err ? err : err.message,
+      message: err || err.message,
     };
 
     DefaultFail.receive(data);

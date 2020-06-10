@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  createRef,
+  forwardRef,
+} from 'react';
 
 import * as Events from './events';
 
@@ -13,7 +20,7 @@ function useMergeState(initialState) {
 
 const FlowPanel = forwardRef((props, ref) => {
   const { id } = props;
-  const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
+  const refs = useRef(Array.from({ length: 4 }, (objRef) => createRef()));
 
   const [flowState, setFlowState] = useMergeState({
     editor: {},

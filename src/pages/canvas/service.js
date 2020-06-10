@@ -1,4 +1,4 @@
-import connect from '@/common/commander/connector';
+import connectCommander from '@/common/commander/connector';
 
 export async function loadCanvas(refs, params, extraParams, callback) {
   // return request('canvas/rpc', {
@@ -14,5 +14,5 @@ export async function loadCanvas(refs, params, extraParams, callback) {
     },
   };
 
-  return connect(refs, request, extraParams, callback);
+  return connectCommander(refs, request, extraParams, callback);
 }

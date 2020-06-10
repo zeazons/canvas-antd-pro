@@ -6,13 +6,15 @@ import WidgetsPanel from './components/WidgetsPanel';
 import ToolbarPanel from './components/ToolbarPanel';
 import PropertiesPanel from './components/PropertiesPanel';
 
+import styles from './assets/less/style.less';
+
 const Canvas = forwardRef((props, ref) => {
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
 
   return (
     <>
       <button
-        onClick={(e) => {
+        onClick={() => {
           const { editor } = refs.current[0].getData();
 
           const dataParams = {
@@ -27,8 +29,8 @@ const Canvas = forwardRef((props, ref) => {
       </button>
 
       <FlowPanel ref={(el) => (refs.current[0] = el)} />
-      <WidgetsPanel ref={(el) => (refs.current[1] = el)} />
-      <ToolbarPanel ref={(el) => (refs.current[2] = el)} />
+      <WidgetsPanel className={styles.canvasWidgets} ref={(el) => (refs.current[1] = el)} />
+      <ToolbarPanel className={styles.canvasToolbar} ref={(el) => (refs.current[2] = el)} />
       <PropertiesPanel ref={(el) => (refs.current[3] = el)} />
     </>
   );

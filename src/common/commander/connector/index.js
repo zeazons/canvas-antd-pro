@@ -1,5 +1,3 @@
-import * as ExtractorCommander from '../extractor';
-
 import * as Commander from '..';
 import { default as UmiRequest, errorHandler } from './worker';
 
@@ -10,7 +8,7 @@ import { default as UmiRequest, errorHandler } from './worker';
 //  * @callback onSuccess response - The callback that handles the response.
 //  * @callback onError error - The callback that handles the error.
 //  */
-const connect = (refs, requestData, extraParams, callback) => {
+const connectCommander = (refs, requestData, extraParams, callback) => {
   let { url, options, onSuccess, onError } = requestData;
   let { method } = options;
 
@@ -50,4 +48,4 @@ const connect = (refs, requestData, extraParams, callback) => {
     });
 };
 
-export default connect;
+export default connectCommander;
