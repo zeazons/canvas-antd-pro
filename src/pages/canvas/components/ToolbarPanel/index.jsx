@@ -17,18 +17,30 @@ import ToolbarRight from './ToolbarRight';
 const ToolbarPanel = forwardRef((props, ref) => {
   const refs = useRef(Array.from({ length: 2 }, (objRef) => createRef()));
 
+  // const onToolButtonClick = (event, data) => {
+  //   if (props) {
+  //     console.log('data: ', data);
+
+  //     props.onToolButtonClick((event, data));
+  //   }
+  // };
+
   useImperativeHandle(ref, () => ({
     getEl() {
       return ref;
     },
-    loadToolbarButton() {},
+    // loadToolbarButton() {},
   }));
 
   return (
     <div className={styles.canvasToolbar} ref={ref}>
       <Row justify="space-between" align="middle">
         <Col>
-          <ToolbarLeft {...props} ref={(el) => (refs.current[0] = el)} />
+          <ToolbarLeft
+            {...props}
+            // onToolButtonClick={onToolButtonClick}
+            ref={(el) => (refs.current[0] = el)}
+          />
         </Col>
         <Col>
           <ToolbarRight {...props} ref={(el) => (refs.current[1] = el)} />

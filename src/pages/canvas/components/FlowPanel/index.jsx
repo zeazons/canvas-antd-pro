@@ -11,20 +11,21 @@ import * as Events from './events';
 
 import styles from './assets/less/style.less';
 
-function useMergeState(initialState) {
+const useMergeState = (initialState) => {
   const [state, setState] = useState(initialState);
   const setMergedState = (newState) =>
     setState((prevState) => Object.assign({}, prevState, newState));
   return [state, setMergedState];
-}
+};
 
 const FlowPanel = forwardRef((props, ref) => {
   const { id } = props;
-  const refs = useRef(Array.from({ length: 4 }, (objRef) => createRef()));
 
   const [flowState, setFlowState] = useMergeState({
     editor: {},
   });
+
+  const refs = useRef(Array.from({ length: 4 }, (objRef) => createRef()));
 
   useImperativeHandle(ref, () => ({
     getData() {

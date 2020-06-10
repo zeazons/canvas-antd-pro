@@ -13,6 +13,10 @@ import styles from './assets/less/style.less';
 const Canvas = forwardRef((props, ref) => {
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
 
+  const onToolButtonClick = (event, data) => {
+    console.log('data: ', data);
+  };
+
   return (
     <>
       <Button
@@ -32,7 +36,11 @@ const Canvas = forwardRef((props, ref) => {
 
       <FlowPanel ref={(el) => (refs.current[0] = el)} />
       <WidgetsPanel className={styles.canvasWidgets} ref={(el) => (refs.current[1] = el)} />
-      <ToolbarPanel className={styles.canvasToolbar} ref={(el) => (refs.current[2] = el)} />
+      <ToolbarPanel
+        className={styles.canvasToolbar}
+        onToolButtonClick={onToolButtonClick}
+        ref={(el) => (refs.current[2] = el)}
+      />
       <PropertiesPanel ref={(el) => (refs.current[3] = el)} />
     </>
   );

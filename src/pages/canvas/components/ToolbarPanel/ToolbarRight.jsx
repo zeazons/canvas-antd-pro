@@ -10,7 +10,7 @@ import {
   faExpand,
 } from '@fortawesome/free-solid-svg-icons';
 
-const ToolbarRightView = React.forwardRef(({ id, height } = props, ref) => (
+const ToolbarRightView = React.forwardRef(({ id, height, onToolButtonClick } = props, ref) => (
   <div
     className="actionbar-right"
     style={{ height: `${height}px` }}
@@ -19,13 +19,38 @@ const ToolbarRightView = React.forwardRef(({ id, height } = props, ref) => (
   >
     <Space size={8}>
       <Col>
-        <Button icon={<FontAwesomeIcon icon={faBorderNone} />} />
+        <Button
+          icon={<FontAwesomeIcon icon={faBorderNone} />}
+          onClick={(event) => {
+            onToolButtonClick(event, 'redoFlow');
+          }}
+        />
       </Col>
       <Col>
-        <Button icon={<FontAwesomeIcon icon={faSearchMinus} />} />
-        <Button icon={<FontAwesomeIcon icon={faSearchPlus} />} />
-        <Button icon={<FontAwesomeIcon icon={faCompress} />} />
-        <Button icon={<FontAwesomeIcon icon={faExpand} />} />
+        <Button
+          icon={<FontAwesomeIcon icon={faSearchMinus} />}
+          onClick={(event) => {
+            onToolButtonClick(event, 'zoomOutFlow');
+          }}
+        />
+        <Button
+          icon={<FontAwesomeIcon icon={faSearchPlus} />}
+          onClick={(event) => {
+            onToolButtonClick(event, 'zoomInFlow');
+          }}
+        />
+        <Button
+          icon={<FontAwesomeIcon icon={faCompress} />}
+          onClick={(event) => {
+            onToolButtonClick(event, 'zoomActualSize');
+          }}
+        />
+        <Button
+          icon={<FontAwesomeIcon icon={faExpand} />}
+          onClick={(event) => {
+            onToolButtonClick(event, 'zoomFitSize');
+          }}
+        />
       </Col>
     </Space>
   </div>

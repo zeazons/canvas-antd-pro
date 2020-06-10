@@ -44,19 +44,65 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           />
         )}
 
-        <Button shape="circle" icon={<FontAwesomeIcon icon={faFolderOpen} />} size="large" />
-        <Button shape="circle" icon={<FontAwesomeIcon icon={faEdit} />} size="large" />
-        <Button shape="circle" icon={<FontAwesomeIcon icon={faSave} />} size="large" />
+        <Button
+          shape="circle"
+          icon={<FontAwesomeIcon icon={faFolderOpen} />}
+          size="large"
+          onClick={(event) => {
+            onToolButtonClick(event, 'loadFlow');
+          }}
+        />
+        <Button
+          shape="circle"
+          icon={<FontAwesomeIcon icon={faEdit} />}
+          size="large"
+          onClick={(event) => {
+            onToolButtonClick(event, 'editFlow');
+          }}
+        />
+        <Button
+          shape="circle"
+          icon={<FontAwesomeIcon icon={faSave} />}
+          size="large"
+          onClick={(event) => {
+            onToolButtonClick(event, 'saveFlow');
+          }}
+        />
 
         <Space size={8}>
           <Col>
-            <Button icon={<FontAwesomeIcon icon={faCheckCircle} />} />
-            <Button icon={<FontAwesomeIcon icon={faHistory} />} />
-            <Button icon={<FontAwesomeIcon icon={faTimesCircle} />} />
+            <Button
+              icon={<FontAwesomeIcon icon={faCheckCircle} />}
+              onClick={(event) => {
+                onToolButtonClick(event, 'commitFlow');
+              }}
+            />
+            <Button
+              icon={<FontAwesomeIcon icon={faHistory} />}
+              onClick={(event) => {
+                onToolButtonClick(event, 'discardFlow');
+              }}
+            />
+            <Button
+              icon={<FontAwesomeIcon icon={faTimesCircle} />}
+              onClick={(event) => {
+                onToolButtonClick(event, 'closeFlow');
+              }}
+            />
           </Col>
           <Col>
-            <Button icon={<FontAwesomeIcon icon={faUndoAlt} />} />
-            <Button icon={<FontAwesomeIcon icon={faRedoAlt} />} />
+            <Button
+              icon={<FontAwesomeIcon icon={faUndoAlt} />}
+              onClick={(event) => {
+                onToolButtonClick(event, 'undoFlow');
+              }}
+            />
+            <Button
+              icon={<FontAwesomeIcon icon={faRedoAlt} />}
+              onClick={(event) => {
+                onToolButtonClick(event, 'redoFlow');
+              }}
+            />
           </Col>
         </Space>
       </Space>
