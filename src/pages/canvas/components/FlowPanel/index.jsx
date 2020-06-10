@@ -41,7 +41,7 @@ const FlowPanel = forwardRef((props, ref) => {
       username: 'Ronaldo',
       canvasId: '250',
     };
-    Events.onInitailFlow(refs.current[0], extraParams, setFlowState);
+    Events.onInitailFlow(refs, extraParams, setFlowState);
   }, []);
 
   return (
@@ -53,7 +53,9 @@ const FlowPanel = forwardRef((props, ref) => {
       ></div>
       <div
         id={`${id}OutlineFlow` || `${new Date().getTime().toString()}OutlineFlow`}
-        className="outline-container"
+        // className="outline-container"
+        className={styles.outlineContainer}
+        ref={(el) => (refs.current[1] = el)}
       ></div>
       <div
         id={`${id}NodeCounter` || `${new Date().getTime().toString()}NodeCounter`}

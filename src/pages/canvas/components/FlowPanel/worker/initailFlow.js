@@ -30,8 +30,8 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
   // window.mxOutline = mxOutline;
   window.mxPoint = mxPoint;
 
-  const container = ref;
-  // const outline = $(containerRef).find('.outline-container')[0];
+  const container = ref.current[0];
+  const outline = ref.current[1];
 
   let graph = '';
   let editor = '';
@@ -68,7 +68,7 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
       return createPopupMenu(editor, menu, cell, evt);
     };
 
-    // new mxOutline(graph, outline);
+    new mxOutline(graph, outline);
 
     // this.bindEventToSaveCanvas(flowRef, editor);
     // this.bindCellConnected(flowRef, editor);
