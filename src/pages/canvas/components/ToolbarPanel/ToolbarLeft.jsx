@@ -48,7 +48,7 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
         <Button shape="circle" icon={<FontAwesomeIcon icon={faEdit} />} size="large" />
         <Button shape="circle" icon={<FontAwesomeIcon icon={faSave} />} size="large" />
 
-        <Space size={16}>
+        <Space size={8}>
           <Col>
             <Button icon={<FontAwesomeIcon icon={faCheckCircle} />} />
             <Button icon={<FontAwesomeIcon icon={faHistory} />} />

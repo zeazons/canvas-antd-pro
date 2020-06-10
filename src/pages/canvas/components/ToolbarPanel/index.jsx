@@ -1,4 +1,11 @@
-import React, { useRef, createRef, forwardRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  createRef,
+  forwardRef,
+} from 'react';
 
 import { Row, Col } from 'antd';
 
@@ -9,6 +16,14 @@ import ToolbarRight from './ToolbarRight';
 
 const ToolbarPanel = forwardRef((props, ref) => {
   const refs = useRef(Array.from({ length: 2 }, (objRef) => createRef()));
+
+  useImperativeHandle(ref, () => ({
+    getEl() {
+      return ref;
+    },
+    loadToolbarButton() {},
+  }));
+
   return (
     <div className={styles.canvasToolbar} ref={ref}>
       <Row justify="space-between" align="middle">

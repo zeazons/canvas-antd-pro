@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, forwardRef } from 'react';
+import { Button } from 'antd';
+
 import { loadCanvas } from './service';
 
 import FlowPanel from './components/FlowPanel';
@@ -13,7 +15,7 @@ const Canvas = forwardRef((props, ref) => {
 
   return (
     <>
-      <button
+      <Button
         onClick={() => {
           const { editor } = refs.current[0].getData();
 
@@ -26,7 +28,7 @@ const Canvas = forwardRef((props, ref) => {
         }}
       >
         Load Canvas
-      </button>
+      </Button>
 
       <FlowPanel ref={(el) => (refs.current[0] = el)} />
       <WidgetsPanel className={styles.canvasWidgets} ref={(el) => (refs.current[1] = el)} />

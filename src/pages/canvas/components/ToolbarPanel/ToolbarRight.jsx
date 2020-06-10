@@ -10,8 +10,6 @@ import {
   faExpand,
 } from '@fortawesome/free-solid-svg-icons';
 
-import ToolbarButton from './components/toolbarButton';
-
 const ToolbarRightView = React.forwardRef(({ id, height } = props, ref) => (
   <div
     className="actionbar-right"
@@ -19,7 +17,7 @@ const ToolbarRightView = React.forwardRef(({ id, height } = props, ref) => (
     id={id || new Date().getTime().toString()}
     ref={ref}
   >
-    <Space size={16}>
+    <Space size={8}>
       <Col>
         <Button icon={<FontAwesomeIcon icon={faBorderNone} />} />
       </Col>
