@@ -17,6 +17,7 @@ import {
 import * as FlowUtiles from '../utils/flowUtiles';
 // import connectCommander from '@/common/commander/connector';
 import * as Services from '../../../services';
+import * as Worker from '@/uiWorker';
 
 import KeyHandler from '../assets/KeyHandler.txt';
 
@@ -33,7 +34,7 @@ const callSaveCanvasServices = (refs, extraParams, editor) => {
   Services.saveCanvas(refs, dataParams, editor);
 };
 
-export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
+export const initailFlow = (refs, extraParams, callback) => {
   window.mxEditor = mxEditor;
   window.mxGraph = mxGraph;
   window.mxDefaultKeyHandler = mxDefaultKeyHandler;
@@ -45,8 +46,8 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
   // window.mxOutline = mxOutline;
   window.mxPoint = mxPoint;
 
-  const container = ref.current[0];
-  const outline = ref.current[1];
+  const container = refs.current[0];
+  const outline = refs.current[1];
 
   let graph = '';
   let editor = '';
@@ -85,21 +86,21 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
 
     new mxOutline(graph, outline);
 
-    // this.bindEventToSaveCanvas(flowRef, editor);
-    // this.bindCellConnected(flowRef, editor);
+    // this.bindEventToSaveCanvas(flowrefs, editor);
+    // this.bindCellConnected(flowrefs, editor);
 
-    bindNodeAdd(ref, extraParams, editor);
-    bindNodeRemove(ref, extraParams, editor);
-    bindNodeMove(ref, extraParams, editor);
-    bindNodeConnect(ref, extraParams, editor);
-    // bindNodeDoubleClick(ref, extraParams, editor, callback);
-    bindNodeDoubleClick(ref, extraParams, editor);
+    bindNodeAdd(refs, extraParams, editor);
+    bindNodeRemove(refs, extraParams, editor);
+    bindNodeMove(refs, extraParams, editor);
+    bindNodeConnect(refs, extraParams, editor);
+    // bindNodeDoubleClick(refs, extraParams, editor, callback);
+    bindNodeDoubleClick(refs, extraParams, editor, callback);
 
-    setFlowStateCallback({ editor: editor });
+    callback({ editor: editor });
   }
 };
 
-export const loadFlow = (refs, setFlowStateCallback) => {
+export const loadFlow = (refs, callback) => {
   var container = refs.current[0];
   // Checks if the browser is supported
   if (!mxClient.isBrowserSupported()) {
@@ -108,7 +109,7 @@ export const loadFlow = (refs, setFlowStateCallback) => {
   } else {
     var graph = new mxGraph(container);
 
-    setFlowStateCallback({ graph });
+    callback({ graph });
     // Adds cells to the model in a single step
     graph.getModel().beginUpdate();
     try {
@@ -204,7 +205,9 @@ const bindNodeDoubleClick = (refs, extraParams, editor, callback) => {
         extraParams.editor = editor;
         extraParams.cell = cell;
 
-        this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
+        // this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
+
+        Worker.showProperties(refs, extraParams, callback);
       }
 
       // Disables any default behaviour for the double click

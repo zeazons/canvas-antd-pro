@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Description extends Component {
   render() {
@@ -20,7 +20,7 @@ class Description extends Component {
 
   // Set default props
   static defaultProps = {
-    title: "",
+    title: '',
   };
 }
 

@@ -10,13 +10,13 @@ import {
 
 import * as ValidationUtils from '@/common/utils/validationUtils';
 
-import {
-  NODE_START,
-  NODE_END,
-  NODE_DECISION,
-  NODE_LOOP,
-  NODE_IMAGE,
-} from '../constants/nodeConstant';
+// import {
+//   NODE_START,
+//   NODE_END,
+//   NODE_DECISION,
+//   NODE_LOOP,
+//   NODE_IMAGE,
+// } from '../../../constants/nodeConstant';
 
 const setNodeStyle = (graph, vertex, node) => {
   let { style } = node;

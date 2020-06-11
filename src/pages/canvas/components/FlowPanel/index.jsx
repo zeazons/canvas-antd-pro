@@ -19,6 +19,8 @@ const useMergeState = (initialState) => {
 };
 
 const FlowPanel = forwardRef((props, ref) => {
+  console.log('ref: ', ref);
+
   const { id } = props;
 
   const [flowState, setFlowState] = useMergeState({

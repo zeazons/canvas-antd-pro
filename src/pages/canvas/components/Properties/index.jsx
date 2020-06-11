@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import React, { Component } from "react";
 
-const Properties = forwardRef((props, ref) => {
-  return <div>Properties</div>;
-});
-
-export default Properties;
+export default class Properties extends Component {
+  render() {
+    return <div>Properties</div>;
+  }
+}
