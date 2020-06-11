@@ -14,9 +14,24 @@ import {
   mxEvent,
 } from 'mxgraph-js';
 
-import { initialGraphProperties, convertValueToString, createPopupMenu } from '../utils/flowUtiles';
+import * as FlowUtiles from '../utils/flowUtiles';
+// import connectCommander from '@/common/commander/connector';
+import * as Services from '../../../services';
 
 import KeyHandler from '../assets/KeyHandler.txt';
+
+const callSaveCanvasServices = (refs, extraParams, editor) => {
+  let dataParams = {
+    params: {
+      data: {
+        ...extraParams,
+        graphModel: FlowUtiles.getXmlGraphModel(editor),
+      },
+    },
+  };
+
+  Services.saveCanvas(refs, dataParams, editor);
+};
 
 export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
   window.mxEditor = mxEditor;
@@ -49,7 +64,7 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
     const config = doc.getElementsByTagName('mxEditor')[0];
     editor = new mxEditor(config);
     graph = editor.graph;
-    initialGraphProperties(editor);
+    FlowUtiles.initialGraphProperties(editor);
 
     // Sets the graph container and configures the editor
     editor.setGraphContainer(container);
@@ -62,10 +77,10 @@ export const initailFlow = (ref, extraParams, setFlowStateCallback) => {
       }
     };
 
-    convertValueToString(graph);
+    FlowUtiles.convertValueToString(graph);
 
     graph.popupMenuHandler.factoryMethod = (menu, cell, evt) => {
-      return createPopupMenu(editor, menu, cell, evt);
+      return FlowUtiles.createPopupMenu(editor, menu, cell, evt);
     };
 
     new mxOutline(graph, outline);
@@ -109,7 +124,7 @@ export const loadFlow = (refs, setFlowStateCallback) => {
   }
 };
 
-const bindNodeAdd = (ref, extraParams, editor) => {
+const bindNodeAdd = (refs, extraParams, editor) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.ADD_CELLS, (sender, evt) => {
@@ -117,39 +132,40 @@ const bindNodeAdd = (ref, extraParams, editor) => {
     cell.nodeType = cell.value.nodeType;
     cell.nodeId = `${cell.value.nodeType}_${cell.id}`;
 
-    this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    // this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    callSaveCanvasServices(refs, extraParams, editor);
     evt.consume();
   });
 };
 
-const bindNodeRemove = (ref, extraParams, editor) => {
+const bindNodeRemove = (refs, extraParams, editor) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.REMOVE_CELLS, (sender, evt) => {
-    this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    callSaveCanvasServices(refs, extraParams, editor);
     evt.consume();
   });
 };
 
-const bindNodeMove = (ref, extraParams, editor) => {
+const bindNodeMove = (refs, extraParams, editor) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
-    this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    callSaveCanvasServices(refs, extraParams, editor);
     evt.consume();
   });
 };
 
-const bindNodeConnect = (ref, extraParams, editor) => {
+const bindNodeConnect = (refs, extraParams, editor) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CONNECT_CELL, (sender, evt) => {
-    this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    callSaveCanvasServices(refs, extraParams, editor);
     evt.consume();
   });
 };
 
-// bindCellConnected = (ref, editor) => {
+// bindCellConnected = (refs, editor) => {
 //   const graph = editor.graph;
 //   graph.addListener(mxEvent.CELL_CONNECTED, (sender, evt) => {
 //     console.log("connect");
@@ -175,7 +191,7 @@ const bindNodeConnect = (ref, extraParams, editor) => {
 //   });
 // };
 
-const bindNodeDoubleClick = (ref, extraParams, editor, callback) => {
+const bindNodeDoubleClick = (refs, extraParams, editor, callback) => {
   const graph = editor.graph;
 
   graph.dblClick = (evt, cell) => {

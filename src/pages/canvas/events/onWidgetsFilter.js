@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
-export const onWidgetsFilter = (ref, extraParams) => {
+// export const onWidgetsFilter = (ref, extraParams) => {
+export const onWidgetsFilter = (event) => {
   console.log('onWidgetsFilter');
-  console.log('ref: ', ref);
-  console.log('extraParams: ', extraParams);
+  console.log('event: ', event);
 
   //   // Init a timeout variable to be used below
   //   let timeout = null;

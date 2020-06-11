@@ -15,12 +15,12 @@ const WidgetsItem = React.forwardRef(({ data, editor } = props, ref) => (
         // console.log("item: ", item);
 
         return (
-          <Row justify="start" align="middle" gutter={16} className={styles.widgetItem}>
-            <Col>
+          <Row justify="start" align="middle" gutter={[8, 8]} className={styles.widgetItem}>
+            <Col offset={1}>
               <Icon src={item.icon} data={item} editor={editor} />
             </Col>
 
-            <Col>
+            <Col offset={1}>
               <Description title={item.nodeName} />
             </Col>
           </Row>

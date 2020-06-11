@@ -24,6 +24,7 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
       <Space size={8}>
         {isExpandWidgets ? (
           <Button
+            type="text"
             shape="circle"
             icon={<FontAwesomeIcon icon={faMinus} />}
             size="large"
@@ -34,6 +35,7 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           />
         ) : (
           <Button
+            type="text"
             shape="circle"
             icon={<FontAwesomeIcon icon={faPlus} />}
             size="large"
@@ -44,7 +46,10 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           />
         )}
 
+        <Divider type="vertical" />
+
         <Button
+          type="text"
           shape="circle"
           icon={<FontAwesomeIcon icon={faFolderOpen} />}
           size="large"
@@ -53,6 +58,7 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           }}
         />
         <Button
+          type="text"
           shape="circle"
           icon={<FontAwesomeIcon icon={faEdit} />}
           size="large"
@@ -61,6 +67,7 @@ const ToolbarLeftView = forwardRef(({ id, onToolButtonClick } = props, ref) => {
           }}
         />
         <Button
+          type="text"
           shape="circle"
           icon={<FontAwesomeIcon icon={faSave} />}
           size="large"

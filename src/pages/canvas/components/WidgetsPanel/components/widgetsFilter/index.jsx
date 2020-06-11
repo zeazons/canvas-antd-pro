@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const WidgetsFilter = React.forwardRef((props, ref) => {
-  const { events, placeholder } = props;
-  const { onWidgetsFilter } = events;
+  const { events, onWidgetsFilter, placeholder } = props;
+  // console.log('events: ', events);
+
+  // const { onWidgetsFilter } = events;
 
   return (
     <div ref={ref}>

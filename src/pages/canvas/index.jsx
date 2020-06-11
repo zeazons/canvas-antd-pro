@@ -15,6 +15,7 @@ import styles from './assets/less/style.less';
 
 const Canvas = forwardRef((props, ref) => {
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
+  const events = [];
 
   const onToolButtonClick = (event, topic) => {
     const { editor } = refs.current[0].getData();
@@ -100,6 +101,19 @@ const Canvas = forwardRef((props, ref) => {
     }
   };
 
+  const onWidgetsFilter = (event) => {
+    const { editor } = refs.current[0].getData();
+    let dataParams = {
+      params: {
+        data: {
+          search: event.target.value,
+        },
+      },
+    };
+
+    Services.loadWidgets(refs, dataParams, editor);
+  };
+
   return (
     <>
       <Button
@@ -120,12 +134,14 @@ const Canvas = forwardRef((props, ref) => {
       <FlowPanel ref={(el) => (refs.current[0] = el)} />
       <WidgetsPanel
         className={styles.canvasWidgets}
-        events={Events}
+        // events={events}
+        onWidgetsFilter={onWidgetsFilter}
         ref={(el) => (refs.current[1] = el)}
       />
       <ToolbarPanel
         className={styles.canvasToolbar}
         onToolButtonClick={onToolButtonClick}
+        // events={events}
         ref={(el) => (refs.current[2] = el)}
       />
       <PropertiesPanel ref={(el) => (refs.current[3] = el)} />
