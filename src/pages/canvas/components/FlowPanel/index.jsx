@@ -76,9 +76,8 @@ const FlowPanel = forwardRef((props, ref) => {
       // canvasId: '250',
     };
 
-    const events = context.events;
-    events.push({ setFlowState: setFlowState });
-    Events.onInitailFlow(refs, extraParams, events);
+    context.setFlowState = setFlowState;
+    Events.onInitailFlow(refs, extraParams, context);
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import * as Worker from '../worker';
 
-export const onInitailFlow = (ref, extraParams, setFlowStateCallback) => {
-  Worker['initailFlow'](ref, extraParams, setFlowStateCallback);
+export const onInitailFlow = (ref, extraParams, context) => {
+  Worker['initailFlow'](ref, extraParams, context);
 };

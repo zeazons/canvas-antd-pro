@@ -34,7 +34,7 @@ const callSaveCanvasServices = (refs, extraParams, editor) => {
   Services.saveCanvas(refs, dataParams, editor);
 };
 
-export const initailFlow = (refs, extraParams, events) => {
+export const initailFlow = (refs, extraParams, context) => {
   window.mxEditor = mxEditor;
   window.mxGraph = mxGraph;
   window.mxDefaultKeyHandler = mxDefaultKeyHandler;
@@ -94,11 +94,9 @@ export const initailFlow = (refs, extraParams, events) => {
     bindNodeMove(refs, extraParams, editor);
     bindNodeConnect(refs, extraParams, editor);
     // bindNodeDoubleClick(refs, extraParams, editor, callback);
-    bindNodeDoubleClick(refs, extraParams, editor, events);
+    bindNodeDoubleClick(refs, extraParams, editor, context);
 
-    console.log('events[1]: ', events[1]);
-
-    events[1].setFlowState({ editor: editor });
+    context.setFlowState({ editor: editor });
   }
 };
 
@@ -194,7 +192,7 @@ const bindNodeConnect = (refs, extraParams, editor) => {
 //   });
 // };
 
-const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
+const bindNodeDoubleClick = (refs, extraParams, editor, context) => {
   const graph = editor.graph;
 
   graph.dblClick = (evt, cell) => {
@@ -208,7 +206,7 @@ const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
         extraParams.cell = cell;
 
         // this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
-        events[0].onNodeDblClick(evt, extraParams);
+        context.onNodeDblClick(evt, extraParams);
         // Worker.showProperties(refs, extraParams, callback);
       }
 

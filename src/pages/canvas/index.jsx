@@ -177,7 +177,7 @@ const Canvas = forwardRef((props, ref) => {
   };
 
   return (
-    <CanvasContextProvider>
+    <CanvasContextProvider refs={refs}>
       <Button
         onClick={() => {
           const { editor } = refs.current[0].getData();
