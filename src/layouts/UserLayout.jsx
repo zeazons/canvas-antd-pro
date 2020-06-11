@@ -6,7 +6,7 @@ import SelectLang from '@/components/SelectLang';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
 
-const UserLayout = props => {
+const UserLayout = (props) => {
   const {
     route = {
       routes: [],
@@ -35,22 +35,22 @@ const UserLayout = props => {
       </Helmet>
 
       <div className={styles.container}>
-        <div className={styles.lang}>
+        {/* <div className={styles.lang}>
           <SelectLang />
-        </div>
+        </div> */}
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                <span className={styles.title}>Canvas</span>
               </Link>
             </div>
-            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+            <div className={styles.desc}></div>
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter copyright="WDS Company Limited. All Rights Reserved." links={[{}]} />
       </div>
     </HelmetProvider>
   );

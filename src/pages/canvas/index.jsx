@@ -6,6 +6,8 @@ import * as Services from './services';
 import * as FlowUtiles from './components/FlowPanel/utils/flowUtiles';
 import * as NodeConstant from './constants/nodeConstant';
 
+import { CanvasContextProvider } from './context';
+
 import FlowPanel from './components/FlowPanel';
 import WidgetsPanel from './components/WidgetsPanel';
 import ToolbarPanel from './components/ToolbarPanel';
@@ -175,7 +177,7 @@ const Canvas = forwardRef((props, ref) => {
   };
 
   return (
-    <>
+    <CanvasContextProvider>
       <Button
         onClick={() => {
           const { editor } = refs.current[0].getData();
@@ -206,9 +208,8 @@ const Canvas = forwardRef((props, ref) => {
       />
       <PropertiesPanel ref={(el) => (refs.current[3] = el)}>
         {/* {renderProperties(props, nodeProperties)} */}
-        xxx
       </PropertiesPanel>
-    </>
+    </CanvasContextProvider>
   );
 });
 

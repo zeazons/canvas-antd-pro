@@ -3,10 +3,12 @@ import React, {
   useEffect,
   useRef,
   useImperativeHandle,
+  useContext,
   createRef,
   forwardRef,
 } from 'react';
 
+import { CanvasContext } from '../../context';
 import * as Events from './events';
 
 import styles from './assets/less/style.less';
@@ -19,7 +21,9 @@ const useMergeState = (initialState) => {
 };
 
 const FlowPanel = forwardRef((props, ref) => {
-  console.log('ref: ', ref);
+  // console.log('ref: ', ref);
+
+  const context = useContext(CanvasContext);
 
   const { id } = props;
 
@@ -68,10 +72,13 @@ const FlowPanel = forwardRef((props, ref) => {
 
   useEffect(() => {
     const extraParams = {
-      username: 'Ronaldo',
-      canvasId: '250',
+      // username: 'Ronaldo',
+      // canvasId: '250',
     };
-    Events.onInitailFlow(refs, extraParams, setFlowState);
+
+    const events = context.events;
+    events.push({ setFlowState: setFlowState });
+    Events.onInitailFlow(refs, extraParams, events);
   }, []);
 
   return (

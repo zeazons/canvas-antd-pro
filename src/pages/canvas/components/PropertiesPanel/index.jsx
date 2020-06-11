@@ -8,7 +8,7 @@ import './assets/css/style.css';
 const PropertiesPanel = forwardRef((props, ref) => {
   const [isModalShow, setIsModalShow] = useState(false);
   const [modalConfig, setModalConfig] = useState({});
-  const [isDrawerShow, setIsDrawerShow] = useState(false);
+  const [isDrawerShow, setIsDrawerShow] = useState(true);
   const [drawerConfig, setDrawerConfig] = useState({});
   const [nodeData, setNodeData] = useState({});
 

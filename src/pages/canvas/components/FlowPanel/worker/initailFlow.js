@@ -34,7 +34,7 @@ const callSaveCanvasServices = (refs, extraParams, editor) => {
   Services.saveCanvas(refs, dataParams, editor);
 };
 
-export const initailFlow = (refs, extraParams, callback) => {
+export const initailFlow = (refs, extraParams, events) => {
   window.mxEditor = mxEditor;
   window.mxGraph = mxGraph;
   window.mxDefaultKeyHandler = mxDefaultKeyHandler;
@@ -94,9 +94,11 @@ export const initailFlow = (refs, extraParams, callback) => {
     bindNodeMove(refs, extraParams, editor);
     bindNodeConnect(refs, extraParams, editor);
     // bindNodeDoubleClick(refs, extraParams, editor, callback);
-    bindNodeDoubleClick(refs, extraParams, editor, callback);
+    bindNodeDoubleClick(refs, extraParams, editor, events);
 
-    callback({ editor: editor });
+    console.log('events[1]: ', events[1]);
+
+    events[1].setFlowState({ editor: editor });
   }
 };
 
@@ -192,7 +194,7 @@ const bindNodeConnect = (refs, extraParams, editor) => {
 //   });
 // };
 
-const bindNodeDoubleClick = (refs, extraParams, editor, callback) => {
+const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
   const graph = editor.graph;
 
   graph.dblClick = (evt, cell) => {
@@ -206,8 +208,8 @@ const bindNodeDoubleClick = (refs, extraParams, editor, callback) => {
         extraParams.cell = cell;
 
         // this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
-
-        Worker.showProperties(refs, extraParams, callback);
+        events[0].onNodeDblClick(evt, extraParams);
+        // Worker.showProperties(refs, extraParams, callback);
       }
 
       // Disables any default behaviour for the double click
