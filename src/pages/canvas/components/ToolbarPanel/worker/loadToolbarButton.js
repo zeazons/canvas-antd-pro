@@ -11,7 +11,7 @@ const setVisibled = (button, isVisible) => {
 
 export const loadToolbarButton = (refs, data) => {
   const { tools } = data;
-  const ref = refs.current[2].getEl();
+  const ref = refs.current[2];
 
   for (let i = 0; i < tools.length; i++) {
     let btn;

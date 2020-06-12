@@ -17,24 +17,10 @@ import {
 import * as FlowUtiles from '../utils/flowUtiles';
 // import connectCommander from '@/common/commander/connector';
 import * as Services from '../../../services';
-import * as Worker from '@/uiWorker';
 
 import KeyHandler from '../assets/KeyHandler.txt';
 
-const callSaveCanvasServices = (refs, extraParams, editor) => {
-  let dataParams = {
-    params: {
-      data: {
-        ...extraParams,
-        graphModel: FlowUtiles.getXmlGraphModel(editor),
-      },
-    },
-  };
-
-  Services.saveCanvas(refs, dataParams, editor);
-};
-
-export const initailFlow = (refs, extraParams, context) => {
+export const initailFlow = (refs, extraParams, events) => {
   window.mxEditor = mxEditor;
   window.mxGraph = mxGraph;
   window.mxDefaultKeyHandler = mxDefaultKeyHandler;
@@ -89,14 +75,14 @@ export const initailFlow = (refs, extraParams, context) => {
     // this.bindEventToSaveCanvas(flowrefs, editor);
     // this.bindCellConnected(flowrefs, editor);
 
-    bindNodeAdd(refs, extraParams, editor);
-    bindNodeRemove(refs, extraParams, editor);
-    bindNodeMove(refs, extraParams, editor);
-    bindNodeConnect(refs, extraParams, editor);
+    bindNodeAdd(refs, extraParams, editor, events);
+    bindNodeRemove(refs, extraParams, editor, events);
+    bindNodeMove(refs, extraParams, editor, events);
+    bindNodeConnect(refs, extraParams, editor, events);
     // bindNodeDoubleClick(refs, extraParams, editor, callback);
-    bindNodeDoubleClick(refs, extraParams, editor, context);
+    bindNodeDoubleClick(refs, extraParams, editor, events);
 
-    context.setFlowState({ editor: editor });
+    events.setFlowState({ editor: editor });
   }
 };
 
@@ -125,7 +111,7 @@ export const loadFlow = (refs, callback) => {
   }
 };
 
-const bindNodeAdd = (refs, extraParams, editor) => {
+const bindNodeAdd = (refs, extraParams, editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.ADD_CELLS, (sender, evt) => {
@@ -134,63 +120,38 @@ const bindNodeAdd = (refs, extraParams, editor) => {
     cell.nodeId = `${cell.value.nodeType}_${cell.id}`;
 
     // this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
-    callSaveCanvasServices(refs, extraParams, editor);
+
+    events.onCanvasSave();
     evt.consume();
   });
 };
 
-const bindNodeRemove = (refs, extraParams, editor) => {
+const bindNodeRemove = (refs, extraParams, editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.REMOVE_CELLS, (sender, evt) => {
-    callSaveCanvasServices(refs, extraParams, editor);
+    events.onCanvasSave();
     evt.consume();
   });
 };
 
-const bindNodeMove = (refs, extraParams, editor) => {
+const bindNodeMove = (refs, extraParams, editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
-    callSaveCanvasServices(refs, extraParams, editor);
+    events.onCanvasSave();
     evt.consume();
   });
 };
 
-const bindNodeConnect = (refs, extraParams, editor) => {
+const bindNodeConnect = (refs, extraParams, editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CONNECT_CELL, (sender, evt) => {
-    callSaveCanvasServices(refs, extraParams, editor);
+    events.onCanvasSave();
     evt.consume();
   });
 };
-
-// bindCellConnected = (refs, editor) => {
-//   const graph = editor.graph;
-//   graph.addListener(mxEvent.CELL_CONNECTED, (sender, evt) => {
-//     console.log("connect");
-
-//     this.receiveEvent(`onCellConnected`, ref, editor);
-
-//     const edge = [evt.getProperty("edge")];
-//     // validateEdgeConnect(graph, edge);
-
-//     // let labels = document.querySelectorAll(
-//     //   `#formDecisionNode input[name='label[]']`
-//     // );
-
-//     // console.log("labels: ", labels);
-
-//     // for (i = 0; i < labels.length; i++) {
-//     //   if (!$.isEmptyObject(labels[i].value)) {
-//     //     if (labels[i].value === edge[0].value) {
-//     //       document.getElementsByName("id[]")[i].value = edge[0].id;
-//     //     }
-//     //   }
-//     // }
-//   });
-// };
 
 const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
   const graph = editor.graph;
@@ -202,11 +163,12 @@ const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
         //   editor: editor,
         //   cell: cell,
         // };
-        extraParams.editor = editor;
-        extraParams.cell = cell;
+        // extraParams.editor = editor;
+        // extraParams.cell = cell;
 
         // this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
-        events.onNodeDblClick(evt, extraParams);
+        events.onNodeDblClick(evt, cell);
+
         // Worker.showProperties(refs, extraParams);
       }
 

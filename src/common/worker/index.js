@@ -1,4 +1,4 @@
-export * from '@/uiWorker';
+export * from '@/uiCommander';
 
 export * from './popupMessage';
 export * from './redirect';

@@ -6,4 +6,3 @@ export * from './zoomOutFlow';
 export * from './zoomInFlow';
 export * from './zoomFitSize';
 export * from './zoomActualSize';
-export * from './showProperties';

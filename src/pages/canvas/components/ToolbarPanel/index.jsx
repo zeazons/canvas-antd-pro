@@ -14,7 +14,10 @@ import styles from './assets/less/style.less';
 import ToolbarLeft from './ToolbarLeft';
 import ToolbarRight from './ToolbarRight';
 
-const ToolbarPanel = forwardRef((props, ref) => {
+const ToolbarPanel = forwardRef(({ events } = props, ref) => {
+  // console.log('props: ', props);
+
+  const { onToolButtonClick } = events;
   const refs = useRef(Array.from({ length: 2 }, (objRef) => createRef()));
 
   // const onToolButtonClick = (event, data) => {
@@ -29,7 +32,12 @@ const ToolbarPanel = forwardRef((props, ref) => {
     getEl() {
       return ref;
     },
-    // loadToolbarButton() {},
+    getChildEl() {
+      return refs;
+    },
+    // loadToolbarButton() {
+    //   loadToolbarButton();
+    // },
   }));
 
   return (
@@ -37,13 +45,17 @@ const ToolbarPanel = forwardRef((props, ref) => {
       <Row justify="space-between" align="middle">
         <Col>
           <ToolbarLeft
-            {...props}
-            // onToolButtonClick={onToolButtonClick}
+            // {...props}
+            onToolButtonClick={onToolButtonClick}
             ref={(el) => (refs.current[0] = el)}
           />
         </Col>
         <Col>
-          <ToolbarRight {...props} ref={(el) => (refs.current[1] = el)} />
+          <ToolbarRight
+            onToolButtonClick={onToolButtonClick}
+            // {...props}
+            ref={(el) => (refs.current[1] = el)}
+          />
         </Col>
       </Row>
     </div>
