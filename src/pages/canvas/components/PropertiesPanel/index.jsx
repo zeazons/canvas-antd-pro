@@ -1,88 +1,81 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import PropTypes from 'prop-types';
+import useMergeState from 'use-merge-value';
 
-import Modal from './modal';
-import Drawer from './drawer';
+import { Drawer } from 'antd';
 
-import './assets/css/style.css';
+import Title from './components/Title';
+import Footer from './components/Footer';
 
-const PropertiesPanel = forwardRef((props, ref) => {
-  const [isModalShow, setIsModalShow] = useState(false);
-  const [modalConfig, setModalConfig] = useState({});
-  const [isDrawerShow, setIsDrawerShow] = useState(true);
-  const [drawerConfig, setDrawerConfig] = useState({});
-  const [nodeData, setNodeData] = useState({});
+// const getWidth = (width) => {
+//   let drawerWidth;
+//   switch (width) {
+//     case 'small':
+//       drawerWidth = 576;
+//       break;
+//     case 'medium':
+//       drawerWidth = 768;
+//       break;
+//     case 'large':
+//       drawerWidth = 992;
+//       break;
 
-  const showModalHandle = (nodeData) => {
-    setIsModalShow(true);
-    setNodeData(nodeData);
-  };
+//     default:
+//       drawerWidth = 576;
+//       break;
+//   }
+//   return drawerWidth;
+// };
 
-  const closeModalHandle = () => {
-    setIsModalShow(false);
-    setNodeData({});
-  };
+const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) => {
+  // const { config, events, children } = props;
+  const [value, setValue] = useMergeState({ width: 576 }, config);
+  const [visible, setVisible] = useState(false);
 
-  const setDrawerSizeHandle = (size) => {
-    setDrawerConfig({
-      drawerConfig: { size: size },
-    });
-  };
+  const { width } = value;
 
-  const showDrawerHandle = (nodeData) => {
-    setIsDrawerShow(true);
-    setNodeData(nodeData);
-  };
-
-  const closeDrawerHandle = () => {
-    setIsDrawerShow(false);
-    setNodeData({});
+  const onDrawerClose = () => {
+    setVisible(false);
   };
 
   useImperativeHandle(ref, () => ({
-    showModal(nodeData) {
-      showModalHandle(nodeData);
+    getData() {},
+    setData(data) {
+      setValue({ ...value, ...data });
     },
-    closeModal() {
-      closeModalHandle();
+    show() {
+      setVisible(true);
     },
-    setDrawerSize(size) {
-      setDrawerSizeHandle(size);
-    },
-    showDrawer(nodeData) {
-      showDrawerHandle(nodeData);
-    },
-    closeDrawer() {
-      closeDrawerHandle();
+    close() {
+      setVisible(false);
     },
   }));
 
-  const { id, children } = props;
-
   return (
-    <div className="properties-block" id={id || new Date().getTime().toString()} ref={ref}>
-      <Modal
-        title={nodeData.nodeType || 'Properties'}
-        showModal={isModalShow}
-        onCloseModalHandler={closeModalHandle}
-        size={nodeData.propertySize}
-      >
-        {children}
-      </Modal>
+    <>
       <Drawer
-        title={nodeData.nodeType}
-        group={nodeData.group}
-        icon={nodeData.icon}
-        showDrawer={isDrawerShow}
-        onCloseDrawerHandler={closeDrawerHandle}
-        size={nodeData.propertySize || 'sm'}
-        anchor="right"
-        setDrawerSize={setDrawerSizeHandle}
+        title={<Title {...value} />}
+        footer={<Footer {...value} {...events} />}
+        placement="right"
+        width={width}
+        onClose={onDrawerClose}
+        visible={visible}
       >
         {children}
-        {/* {renderProperties(props, nodeData)} */}
       </Drawer>
-    </div>
+    </>
   );
 });
+
+PropertiesPanel.propTypes = {
+  config: PropTypes.object,
+  events: PropTypes.array,
+  children: PropTypes.node.isRequired,
+};
+
+PropertiesPanel.defaultProps = {
+  children: <p>No Properties...</p>,
+  width: 576,
+};
 
 export default PropertiesPanel;

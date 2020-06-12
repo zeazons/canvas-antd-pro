@@ -1,5 +1,6 @@
 import React, { useReducer, createContext } from 'react';
 
+import * as Worker from '@/uiWorker';
 export const CanvasContext = createContext();
 
 export const CanvasContextProvider = (props) => {
@@ -8,10 +9,7 @@ export const CanvasContextProvider = (props) => {
   const initialState = {
     isPropertiesShow: false,
     onNodeDblClick: (event, params) => {
-      console.log('refs: ', refs);
-      console.log('onNodeDblClick');
-      console.log('event: ', event);
-      console.log('params: ', params);
+      Worker.showProperties(refs, params);
     },
   };
 

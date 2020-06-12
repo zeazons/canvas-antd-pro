@@ -16,11 +16,11 @@ import PropertiesPanel from './components/PropertiesPanel';
 import NoProperties from './components/properties/NoProperties';
 import CodeProperties from './components/properties/CodeProperties';
 
-import * as Events from './events';
-
 import styles from './assets/less/style.less';
 
 const renderProperties = (props, nodeData) => {
+  console.log('nodeData: ', nodeData);
+
   switch (nodeData.nodeType) {
     // case NodeConstant.NODE_TYPE_DECISION:
     //   return (
@@ -72,7 +72,6 @@ const Canvas = forwardRef((props, ref) => {
   const [nodeProperties, setNodeProperties] = useState({});
 
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
-  const events = [];
 
   const onToolButtonClick = (event, topic) => {
     const { editor } = refs.current[0].getData();
@@ -176,6 +175,17 @@ const Canvas = forwardRef((props, ref) => {
     Services.loadWidgets(refs, dataParams, editor);
   };
 
+  const config = {
+    width: 576,
+  };
+
+  const events = {
+    onSubmit: (event) => {
+      console.log('onSubmit');
+      console.log('event: ', event);
+    },
+  };
+
   return (
     <CanvasContextProvider refs={refs}>
       <Button
@@ -206,8 +216,12 @@ const Canvas = forwardRef((props, ref) => {
         // events={events}
         ref={(el) => (refs.current[2] = el)}
       />
-      <PropertiesPanel ref={(el) => (refs.current[3] = el)}>
-        {/* {renderProperties(props, nodeProperties)} */}
+      {/* <PropertiesPanel ref={(el) => (refs.current[3] = el)}> */}
+      {/* {renderProperties(props, nodeProperties)} */}
+      {/* <h1>123</h1> */}
+      {/* </PropertiesPanel> */}
+      <PropertiesPanel config={config} events={events} ref={(el) => (refs.current[3] = el)}>
+        {renderProperties(props, nodeProperties)}
       </PropertiesPanel>
     </CanvasContextProvider>
   );
