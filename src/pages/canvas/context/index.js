@@ -76,7 +76,7 @@ export const CanvasContextProvider = (props) => {
         let isWidgetsShowFlag;
 
         switch (topic) {
-          case 'expandWidgets':
+          case 'CollapseWidgets':
             // this.eventBloc.expandWidgets(refs, { visibled: true }, this.setIsWidgetsShow);
             // const data = { visibled: true };
 
@@ -84,67 +84,67 @@ export const CanvasContextProvider = (props) => {
             UICommander.expandWidgets(refs, isWidgetsShowFlag, setIsWidgetsShow(isWidgetsShowFlag));
             break;
 
-          case 'collapseWidgets':
+          case 'ExpandWidgets':
             // this.eventBloc.collapseWidgets(refs, { visibled: false }, this.setIsWidgetsShow);
             // const data = { visibled: false };
             isWidgetsShowFlag = { visibled: false };
             UICommander.expandWidgets(refs, isWidgetsShowFlag, setIsWidgetsShow(isWidgetsShowFlag));
             break;
 
-          case 'editFlow':
+          case 'EditFlow':
             // this.eventBloc.editFlow(refs, extraParams, this.setIsWidgetsShow);
             dataParams.params.data.editing = true;
             Services.editCanvas(refs, dataParams, editor);
             break;
 
-          case 'saveFlow':
+          case 'SaveFlow':
             // const editor = this.state.editor;
             // this.eventBloc.saveFlow(refs, editor);
             dataParams.params.data.graphModel = FlowUtiles.getXmlGraphModel(editor);
             Services.saveCanvas(refs, dataParams, editor);
             break;
 
-          case 'commitFlow':
+          case 'CommitFlow':
             // this.eventBloc.commitFlow(refs, extraParams, this.setIsWidgetsShow);
             dataParams.params.data.editing = false;
             Services.commitCanvas(refs, dataParams, editor);
             break;
 
-          case 'discardFlow':
+          case 'DiscardFlow':
             // this.eventBloc.discardFlow(refs, extraParams, this.setIsWidgetsShow);
             dataParams.params.data.editing = false;
             Services.discardCanvas(refs, dataParams, editor);
             break;
 
-          case 'closeFlow':
+          case 'CloseFlow':
             // this.eventBloc.closeFlow(refs);
             Services.closeCanvas(refs, dataParams, editor);
             break;
 
-          case 'undoFlow':
+          case 'UndoFlow':
             // this.eventBloc.undoFlow(refs);
             Services.undoCanvas(refs, dataParams, editor);
             break;
 
-          case 'redoFlow':
+          case 'RedoFlow':
             // this.eventBloc.redoFlow(refs);
             Services.redoCanvas(refs, dataParams, editor);
             break;
 
-          case 'toggleFlowGuideline':
+          case 'ToggleGuideline':
             refs.current[0].toggleFlowGuideline();
             break;
 
-          case 'zoomOutFlow':
+          case 'ZoomOut':
             refs.current[0].zoomOutFlow();
             break;
-          case 'zoomInFlow':
+          case 'ZoomIn':
             refs.current[0].zoomInFlow();
             break;
-          case 'zoomActualSize':
+          case 'ZoomActualSize':
             refs.current[0].zoomActualSize();
             break;
-          case 'zoomFitSize':
+          case 'ZoomFitSize':
             refs.current[0].zoomFitSize();
             break;
 

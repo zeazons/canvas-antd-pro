@@ -2,9 +2,8 @@ import { mxUtils, mxGraphModel, mxGeometry, mxCodec } from 'mxgraph-js';
 
 import * as ValidationUtils from '@/common/utils/validationUtils';
 
-export const readFlow = (refs, data, editor) => {
+export const readFlow = (editor, graphModel) => {
   const { graph } = editor;
-  const { graphModel } = data;
 
   if (!ValidationUtils.isEmpty(graphModel)) {
     window.mxGraphModel = mxGraphModel;

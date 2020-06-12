@@ -14,11 +14,11 @@ import {
   mxEvent,
 } from 'mxgraph-js';
 
-import * as FlowUtiles from '../utils/flowUtiles';
+import * as FlowUtiles from '../../utils/flowUtiles';
 // import connectCommander from '@/common/commander/connector';
-import * as Services from '../../../services';
+import * as Services from '../../../../services';
 
-import KeyHandler from '../assets/KeyHandler.txt';
+import KeyHandler from '../../assets/KeyHandler.txt';
 
 export const initailFlow = (refs, extraParams, events) => {
   window.mxEditor = mxEditor;

@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 
 import * as Events from './events';
+import * as Commander from './commander';
 
 import styles from './assets/less/style.less';
 
@@ -34,13 +35,13 @@ const FlowPanel = forwardRef(({ events }, ref) => {
     // setData(data) {
     //   setFlowState(data);
     // },
-    readFlow(data) {
+    readFlow(graphModel) {
       const { editor } = flowState;
-      Events.onReadFlow(refs.current[0], data, editor);
+      Commander.readFlow(editor, graphModel);
     },
-    lock(data) {
+    lockFlow(isLock) {
       const { editor } = flowState;
-      Events.onLock(refs.current[0], data, editor);
+      Commander.lock(editor, isLock);
     },
     toggleFlowGuideline() {
       const { editor } = flowState;
