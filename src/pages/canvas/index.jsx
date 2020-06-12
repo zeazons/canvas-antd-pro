@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, forwardRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, forwardRef } from 'react';
 import { Button } from 'antd';
 
 import * as Worker from '@/uiWorker';
@@ -6,7 +6,7 @@ import * as Services from './services';
 import * as FlowUtiles from './components/FlowPanel/utils/flowUtiles';
 import * as NodeConstant from './constants/nodeConstant';
 
-import { CanvasContextProvider } from './context';
+import { CanvasContextProvider, CanvasContextConsumer } from './context';
 
 import FlowPanel from './components/FlowPanel';
 import WidgetsPanel from './components/WidgetsPanel';
@@ -19,19 +19,7 @@ import CodeProperties from './components/properties/CodeProperties';
 import styles from './assets/less/style.less';
 
 const renderProperties = (props, nodeData) => {
-  console.log('nodeData: ', nodeData);
-
   switch (nodeData.nodeType) {
-    // case NodeConstant.NODE_TYPE_DECISION:
-    //   return (
-    //     <DecisionProperties
-    //       {...props}
-    //       nodeType={nodeData.nodeType}
-    //       nodeId={nodeData.nodeId}
-    //       nodeName={nodeData.nodeName}
-    //       group={nodeData.group}
-    //     />
-    //   );
     case NodeConstant.NODE_TYPE_CODE:
       return (
         <CodeProperties
@@ -42,32 +30,13 @@ const renderProperties = (props, nodeData) => {
           group={nodeData.group}
         />
       );
-    // case NodeConstant.NODE_TYPE_SCREEN:
-    //   return (
-    //     <ScreenProperties
-    //       {...props}
-    //       nodeType={nodeData.nodeType}
-    //       nodeId={nodeData.nodeId}
-    //       nodeName={nodeData.nodeName}
-    //       group={nodeData.group}
-    //     />
-    //   );
-    // case NodeConstant.NODE_TYPE_KEY:
-    //   return (
-    //     <KeyProperties
-    //       {...props}
-    //       nodeType={nodeData.nodeType}
-    //       nodeId={nodeData.nodeId}
-    //       nodeName={nodeData.nodeName}
-    //       group={nodeData.group}
-    //     />
-    //   );
+
     default:
       return <NoProperties />;
   }
 };
 
-const Canvas = forwardRef((props, ref) => {
+const Canvas = (props) => {
   const [isWidgetsShow, setIsWidgetsShow] = useState({ visibled: false });
   const [nodeProperties, setNodeProperties] = useState({});
 
@@ -179,52 +148,51 @@ const Canvas = forwardRef((props, ref) => {
     width: 576,
   };
 
-  const events = {
-    onSubmit: (event) => {
-      console.log('onSubmit');
-      console.log('event: ', event);
-    },
-  };
-
   return (
     <CanvasContextProvider refs={refs}>
-      <Button
-        onClick={() => {
-          const { editor } = refs.current[0].getData();
+      <CanvasContextConsumer>
+        {({ events } = context) => {
+          // console.log('context: ', context);
+          return (
+            <>
+              <Button
+                onClick={() => {
+                  const { editor } = refs.current[0].getData();
 
-          const dataParams = {
-            params: {
-              data: { username: 'Ronaldo', canvasId: '250' },
-            },
-          };
-          Services.loadCanvas(refs, dataParams, editor);
+                  const dataParams = {
+                    params: {
+                      data: { username: 'Ronaldo', canvasId: '250' },
+                    },
+                  };
+                  Services.loadCanvas(refs, dataParams, editor);
+                }}
+              >
+                Load Canvas
+              </Button>
+
+              <FlowPanel events={events} ref={(el) => (refs.current[0] = el)} />
+              <WidgetsPanel
+                className={styles.canvasWidgets}
+                // events={events}
+                onWidgetsFilter={onWidgetsFilter}
+                ref={(el) => (refs.current[1] = el)}
+              />
+              <ToolbarPanel
+                className={styles.canvasToolbar}
+                onToolButtonClick={onToolButtonClick}
+                // events={events}
+                ref={(el) => (refs.current[2] = el)}
+              />
+
+              <PropertiesPanel config={config} events={events} ref={(el) => (refs.current[3] = el)}>
+                {renderProperties(props, nodeProperties)}
+              </PropertiesPanel>
+            </>
+          );
         }}
-      >
-        Load Canvas
-      </Button>
-
-      <FlowPanel ref={(el) => (refs.current[0] = el)} />
-      <WidgetsPanel
-        className={styles.canvasWidgets}
-        // events={events}
-        onWidgetsFilter={onWidgetsFilter}
-        ref={(el) => (refs.current[1] = el)}
-      />
-      <ToolbarPanel
-        className={styles.canvasToolbar}
-        onToolButtonClick={onToolButtonClick}
-        // events={events}
-        ref={(el) => (refs.current[2] = el)}
-      />
-      {/* <PropertiesPanel ref={(el) => (refs.current[3] = el)}> */}
-      {/* {renderProperties(props, nodeProperties)} */}
-      {/* <h1>123</h1> */}
-      {/* </PropertiesPanel> */}
-      <PropertiesPanel config={config} events={events} ref={(el) => (refs.current[3] = el)}>
-        {renderProperties(props, nodeProperties)}
-      </PropertiesPanel>
+      </CanvasContextConsumer>
     </CanvasContextProvider>
   );
-});
+};
 
 export default Canvas;

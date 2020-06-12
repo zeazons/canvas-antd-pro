@@ -8,7 +8,6 @@ import React, {
   forwardRef,
 } from 'react';
 
-import { CanvasContext } from '../../context';
 import * as Events from './events';
 
 import styles from './assets/less/style.less';
@@ -20,12 +19,8 @@ const useMergeState = (initialState) => {
   return [state, setMergedState];
 };
 
-const FlowPanel = forwardRef((props, ref) => {
+const FlowPanel = forwardRef(({ events }, ref) => {
   // console.log('ref: ', ref);
-
-  const context = useContext(CanvasContext);
-
-  const { id } = props;
 
   const [flowState, setFlowState] = useMergeState({
     editor: {},
@@ -76,31 +71,20 @@ const FlowPanel = forwardRef((props, ref) => {
       // canvasId: '250',
     };
 
-    context.setFlowState = setFlowState;
-    Events.onInitailFlow(refs, extraParams, context);
+    events.setFlowState = setFlowState;
+    Events.onInitailFlow(refs, extraParams, events);
   }, []);
 
   return (
     <div className="flow-container">
+      <div className={styles.graphContainer} ref={(el) => (refs.current[0] = el)}></div>
       <div
-        className={styles.graphContainer}
-        id={id || new Date().getTime().toString()}
-        ref={(el) => (refs.current[0] = el)}
-      ></div>
-      <div
-        id={`${id}OutlineFlow` || `${new Date().getTime().toString()}OutlineFlow`}
         // className="outline-container"
         className={styles.outlineContainer}
         ref={(el) => (refs.current[1] = el)}
       ></div>
-      <div
-        id={`${id}NodeCounter` || `${new Date().getTime().toString()}NodeCounter`}
-        className="node-counter-container"
-      >
-        <p
-          id={`${id}NodeCount` || `${new Date().getTime().toString()}NodeCount`}
-          className="badge badge-pill badge-success"
-        ></p>
+      <div className="node-counter-container">
+        <p className="badge badge-pill badge-success"></p>
       </div>
     </div>
   );

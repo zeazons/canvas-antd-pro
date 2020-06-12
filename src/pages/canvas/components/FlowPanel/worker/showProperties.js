@@ -1,10 +1,4 @@
-export const showProperties = (refs, data, callback) => {
-  const nodeData = {
-    group: 'etc.',
-    size: 'sm',
-    ...data.cell,
-  };
-
+export const showProperties = (refs, data) => {
   const { nodeType, systemType } = data.cell;
 
   refs.current[3].show(true);

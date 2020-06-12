@@ -192,7 +192,7 @@ const bindNodeConnect = (refs, extraParams, editor) => {
 //   });
 // };
 
-const bindNodeDoubleClick = (refs, extraParams, editor, context) => {
+const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
   const graph = editor.graph;
 
   graph.dblClick = (evt, cell) => {
@@ -206,8 +206,8 @@ const bindNodeDoubleClick = (refs, extraParams, editor, context) => {
         extraParams.cell = cell;
 
         // this.receiveEvent(`onDblClickNode`, ref, extraParams, callback);
-        context.onNodeDblClick(evt, extraParams);
-        // Worker.showProperties(refs, extraParams, callback);
+        events.onNodeDblClick(evt, extraParams);
+        // Worker.showProperties(refs, extraParams);
       }
 
       // Disables any default behaviour for the double click

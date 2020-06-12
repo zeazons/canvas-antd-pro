@@ -69,7 +69,7 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
 
 PropertiesPanel.propTypes = {
   config: PropTypes.object,
-  events: PropTypes.array,
+  events: PropTypes.object,
   children: PropTypes.node.isRequired,
 };
 
