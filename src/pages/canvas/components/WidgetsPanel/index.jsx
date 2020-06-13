@@ -7,12 +7,9 @@ import React, {
   forwardRef,
 } from 'react';
 
-import { Row, Col, Space, Card, Avatar, Affix } from 'antd';
-
-const { Meta } = Card;
+import { Row, Col, Affix } from 'antd';
 
 import WidgetsFilter from './components/widgetsFilter';
-import WidgetsList from './components/widgetsList';
 import Icon from './components/widgetsItem/icon';
 
 import * as ValidationUtils from '@/common/utils/validationUtils';
@@ -51,9 +48,7 @@ const WidgetsPanel = forwardRef((props, ref) => {
     isWidgetsExpanded: true,
   });
 
-  // this.nodeRef = React.createRef();
   const nodeRef = React.createRef();
-  // const { editor } = props;
 
   useImperativeHandle(ref, () => ({
     setData(data, editor) {
@@ -65,15 +60,6 @@ const WidgetsPanel = forwardRef((props, ref) => {
     },
   }));
 
-  // useImperativeHandle(ref, () => ({
-  //   getEl() {
-  //     return ref;
-  //   },
-  //   getChildEl() {
-  //     return refs;
-  //   },
-  // }));
-
   const { isWidgetsExpanded, widgetsFilter } = widgetsState;
 
   return (
@@ -81,19 +67,13 @@ const WidgetsPanel = forwardRef((props, ref) => {
       {visible && (
         <>
           <Affix offsetTop={0}>
-            <WidgetsFilter
-              placeholder="Filter Widgets..."
-              onFilter={onFilterNodeHandler}
-              // {...props}
-            />
+            <WidgetsFilter placeholder="Filter Widgets..." onFilter={onFilterNodeHandler} />
           </Affix>
 
           {widgets.map((item, i) => {
             return (
               <Row gutter={[16, 16]} key={`${item.nodeName}_${i}`} justify="start" align="middle">
                 <Col span={5} offset={1}>
-                  {/* <Avatar size="large" src={item.icon} /> */}
-
                   {!ValidationUtils.isEmpty(editor) && (
                     <Icon
                       src={item.icon}
@@ -108,12 +88,6 @@ const WidgetsPanel = forwardRef((props, ref) => {
               </Row>
             );
           })}
-          {/* <WidgetsList
-                {...props}
-                data={widgetsFilter}
-                // id={`${id}NodeList`}
-                ref={(el) => (refs.current[2] = el)}
-              /> */}
         </>
       )}
     </div>
@@ -121,26 +95,3 @@ const WidgetsPanel = forwardRef((props, ref) => {
 });
 
 export default WidgetsPanel;
-
-// <div className={styles.canvasWidgets} {...props} ref={ref}>
-//   {isWidgetsExpanded && (
-//     <div
-//       className="widgets-panel"
-//       ref={(el) => (refs.current[0] = el)}
-//       style={{ display: 'none' }}
-//     >
-//       <WidgetsFilter
-//         placeholder="Filter Widgets..."
-//         onFilter={onFilterNodeHandler}
-//         ref={(el) => (refs.current[1] = el)}
-//         {...props}
-//       />
-//       <WidgetsList
-//         {...props}
-//         data={widgetsFilter}
-//         // id={`${id}NodeList`}
-//         ref={(el) => (refs.current[2] = el)}
-//       />
-//     </div>
-//   )}
-// </div>

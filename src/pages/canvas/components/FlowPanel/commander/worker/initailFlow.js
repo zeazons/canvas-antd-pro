@@ -120,8 +120,6 @@ const bindNodeAdd = (editor, events) => {
     cell.nodeType = cell.value.nodeType;
     cell.nodeId = `${cell.value.nodeType}_${cell.id}`;
 
-    console.log('cell.value: ', cell.value);
-
     events.onCanvasSave();
     evt.consume();
   });
