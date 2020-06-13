@@ -1,8 +1,12 @@
 export * from './lock';
-export * from './readFlow';
 
-export * from './loadWidgets';
+export * from './flow/readFlow';
 
-export * from './loadToolbarButton';
+export * from './widgets/showWidgets';
+export * from './widgets/expandWidgets';
+export * from './widgets/loadWidgets';
+export * from './widgets/renderWidgets';
 
-export * from './showProperties';
+export * from './toolbar/loadToolbarButton';
+
+export * from './properties/showProperties';

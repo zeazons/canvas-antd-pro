@@ -3,10 +3,16 @@
   display: block;
   height: calc(100% - 60px);
   left: 0;
-  width: 300px;
+  // width: 300px;
   z-index: 100;
   position: absolute;
   overflow-y: auto;
+  background: #1C1B20;
+  color: #FFF;
+}
+
+.widgetsItem {
+  color: #FFF;
 }
 
 .widgetsList {
@@ -16,4 +22,13 @@
 .widgetItem {
   background: #1C1B20;
   color: #FFF;
+}
+
+
+.widgetIcon {
+  &:hover {
+    cursor: pointer;
+    // border: 2px solid rgb(157, 203, 109);
+    // border-radius: 50px;
+  }
 }

@@ -1,7 +1,8 @@
-import React, { useImperativeHandle, forwardRef } from "react";
-import PropTypes from "prop-types";
+import React, { useImperativeHandle, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
-import { Card, Avatar } from "antd";
+import { Card, Avatar } from 'antd';
+import Logo from '@/assets/logo.svg';
 
 const { Meta } = Card;
 
@@ -9,24 +10,20 @@ const Title = forwardRef(({ icon, title, description } = props, ref) => {
   useImperativeHandle(ref, () => ({}));
 
   return (
-    <Meta
-      avatar={<Avatar src={icon} />}
-      title={title}
-      description={description}
-    />
+    <Meta avatar={<Avatar shape="square" src={icon} />} title={title} description={description} />
   );
 });
 
 Title.propTypes = {
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 Title.defaultProps = {
-  icon: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-  title: "Properties",
-  description: ""
+  icon: Logo,
+  title: 'Properties',
+  description: '',
 };
 
 export default Title;

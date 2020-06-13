@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { addNode } from '../../../utils/widgetsUtils';
 
+import styles from '../../../assets/less/style.less';
 class Icon extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class Icon extends Component {
   }
 
   render() {
-    return <div className="card-img" ref={this.nodeRef} />;
+    return <div className={styles.widgetIcon} ref={this.nodeRef} />;
   }
 
   // Set default props

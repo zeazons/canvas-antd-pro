@@ -69,7 +69,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
   // };
 
   useImperativeHandle(ref, () => ({
-    setTools(data) {
+    setData(data) {
       setTools(data);
     },
   }));

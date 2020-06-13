@@ -18,6 +18,8 @@ const WidgetsFilter = React.forwardRef((props, ref) => {
         addonAfter={<FontAwesomeIcon icon={faFilter} />}
         defaultValue=""
         onKeyUp={(event) => onWidgetsFilter(event)}
+        size="large"
+        style={{ width: '260px' }}
         // onKeyUp={(event) => console.log('ref: ', ref)}
       />
       {/* <div>

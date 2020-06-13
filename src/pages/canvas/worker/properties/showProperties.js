@@ -3,6 +3,7 @@ export const showProperties = (refs, data) => {
 
   refs.current[3].show(true);
   refs.current[3].setData({
+    icon: icon,
     title: nodeType,
     description: systemType,
   });

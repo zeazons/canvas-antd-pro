@@ -75,12 +75,12 @@ export const initailFlow = (refs, extraParams, events) => {
     // this.bindEventToSaveCanvas(flowrefs, editor);
     // this.bindCellConnected(flowrefs, editor);
 
-    bindNodeAdd(refs, extraParams, editor, events);
-    bindNodeRemove(refs, extraParams, editor, events);
-    bindNodeMove(refs, extraParams, editor, events);
-    bindNodeConnect(refs, extraParams, editor, events);
+    bindNodeAdd(editor, events);
+    bindNodeRemove(editor, events);
+    bindNodeMove(editor, events);
+    bindNodeConnect(editor, events);
     // bindNodeDoubleClick(refs, extraParams, editor, callback);
-    bindNodeDoubleClick(refs, extraParams, editor, events);
+    bindNodeDoubleClick(editor, events);
 
     events.setFlowState({ editor: editor });
   }
@@ -111,22 +111,23 @@ export const loadFlow = (refs, callback) => {
   }
 };
 
-const bindNodeAdd = (refs, extraParams, editor, events) => {
+const bindNodeAdd = (editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.ADD_CELLS, (sender, evt) => {
     const cell = evt.properties.cells[0];
+    cell.icon = cell.value.icon;
     cell.nodeType = cell.value.nodeType;
     cell.nodeId = `${cell.value.nodeType}_${cell.id}`;
 
-    // this.receiveEvent(`onChangeCanvas`, ref, extraParams, editor);
+    console.log('cell.value: ', cell.value);
 
     events.onCanvasSave();
     evt.consume();
   });
 };
 
-const bindNodeRemove = (refs, extraParams, editor, events) => {
+const bindNodeRemove = (editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.REMOVE_CELLS, (sender, evt) => {
@@ -135,7 +136,7 @@ const bindNodeRemove = (refs, extraParams, editor, events) => {
   });
 };
 
-const bindNodeMove = (refs, extraParams, editor, events) => {
+const bindNodeMove = (editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
@@ -144,7 +145,7 @@ const bindNodeMove = (refs, extraParams, editor, events) => {
   });
 };
 
-const bindNodeConnect = (refs, extraParams, editor, events) => {
+const bindNodeConnect = (editor, events) => {
   const { graph } = editor;
 
   graph.addListener(mxEvent.CONNECT_CELL, (sender, evt) => {
@@ -153,7 +154,7 @@ const bindNodeConnect = (refs, extraParams, editor, events) => {
   });
 };
 
-const bindNodeDoubleClick = (refs, extraParams, editor, events) => {
+const bindNodeDoubleClick = (editor, events) => {
   const graph = editor.graph;
 
   graph.dblClick = (evt, cell) => {

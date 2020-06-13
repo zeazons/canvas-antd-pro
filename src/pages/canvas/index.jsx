@@ -41,6 +41,7 @@ const propertirsPanelConfig = {
 
 const Canvas = (props) => {
   const [nodeProperties, setNodeProperties] = useState({});
+  const [editor, setEditor] = useState({});
 
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
 
@@ -57,7 +58,9 @@ const Canvas = (props) => {
     Services.loadWidgets(refs, dataParams, editor);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setEditor(refs.current[0].getData());
+  }, []);
 
   return (
     <CanvasContextProvider refs={refs}>
@@ -67,18 +70,23 @@ const Canvas = (props) => {
           return (
             <>
               <Button onClick={events.onCanvasLoad}>Load Canvas</Button>
+
               <FlowPanel events={events} ref={(el) => (refs.current[0] = el)} />
+
               <WidgetsPanel
                 className={styles.canvasWidgets}
                 events={events}
+                editor={editor}
                 // onWidgetsFilter={onWidgetsFilter}
                 ref={(el) => (refs.current[1] = el)}
               />
+
               <ToolbarPanel
                 className={styles.canvasToolbar}
                 events={events}
                 ref={(el) => (refs.current[2] = el)}
               />
+
               <PropertiesPanel
                 config={propertirsPanelConfig}
                 events={events}
