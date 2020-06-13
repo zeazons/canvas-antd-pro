@@ -66,11 +66,8 @@ const Canvas = (props) => {
     <CanvasContextProvider refs={refs}>
       <CanvasContextConsumer>
         {({ events } = context) => {
-          // console.log('context: ', context);
           return (
             <>
-              <Button onClick={events.onCanvasLoad}>Load Canvas</Button>
-
               <FlowPanel events={events} ref={(el) => (refs.current[0] = el)} />
 
               <WidgetsPanel

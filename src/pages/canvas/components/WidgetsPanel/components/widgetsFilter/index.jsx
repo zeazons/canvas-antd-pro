@@ -5,8 +5,9 @@ import { Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
-const WidgetsFilter = React.forwardRef((props, ref) => {
-  const { events, onWidgetsFilter, placeholder } = props;
+const WidgetsFilter = React.forwardRef(({ onWidgetsFilter, placeholder } = props, ref) => {
+  // const { events, onWidgetsFilter, placeholder } = props;
+
   // console.log('events: ', events);
 
   // const { onWidgetsFilter } = events;
@@ -18,7 +19,7 @@ const WidgetsFilter = React.forwardRef((props, ref) => {
         addonAfter={<FontAwesomeIcon icon={faFilter} />}
         defaultValue=""
         onKeyUp={(event) => onWidgetsFilter(event)}
-        size="large"
+        // size="large"
         style={{ width: '260px' }}
         // onKeyUp={(event) => console.log('ref: ', ref)}
       />

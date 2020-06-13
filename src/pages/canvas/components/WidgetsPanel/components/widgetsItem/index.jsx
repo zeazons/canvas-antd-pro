@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Row, Col } from 'antd';
 
-import Icon from './icon';
+import Icon from '../widgetsIcon';
 import Description from './description';
 
 import styles from '../../assets/less/style.less';

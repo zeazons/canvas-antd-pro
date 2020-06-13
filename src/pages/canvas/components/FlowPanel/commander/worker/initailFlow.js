@@ -66,6 +66,7 @@ export const initailFlow = (refs, extraParams, events) => {
 
     FlowUtiles.convertValueToString(graph);
 
+    graph.centerZoom = true;
     graph.popupMenuHandler.factoryMethod = (menu, cell, evt) => {
       return FlowUtiles.createPopupMenu(editor, menu, cell, evt);
     };

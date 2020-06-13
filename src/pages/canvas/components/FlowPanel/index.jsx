@@ -73,20 +73,21 @@ const FlowPanel = forwardRef(({ events }, ref) => {
 
     events.setFlowState = setFlowState;
     Events.onInitailFlow(refs, extraParams, events);
+    events.onCanvasLoad();
   }, []);
 
   return (
-    <div className="flow-container">
+    <>
       <div className={styles.graphContainer} ref={(el) => (refs.current[0] = el)}></div>
       <div
         // className="outline-container"
         className={styles.outlineContainer}
         ref={(el) => (refs.current[1] = el)}
       ></div>
-      <div className="node-counter-container">
+      {/* <div className="node-counter-container">
         <p className="badge badge-pill badge-success"></p>
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 });
 

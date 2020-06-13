@@ -10,43 +10,31 @@ import React, {
 import { Row, Col, Affix } from 'antd';
 
 import WidgetsFilter from './components/widgetsFilter';
-import Icon from './components/widgetsItem/icon';
+import Icon from './components/widgetsIcon';
 
 import * as ValidationUtils from '@/common/utils/validationUtils';
 
 import styles from './assets/less/style.less';
 
-const useMergeState = (initialState) => {
-  const [state, setState] = useState(initialState);
-  const setMergedState = (newState) =>
-    setState((prevState) => Object.assign({}, prevState, newState));
-  return [state, setMergedState];
-};
+// const onFilterNodeHandler = (e) => {
+//   const filter = e.target.value.toUpperCase();
 
-const onFilterNodeHandler = (e) => {
-  const filter = e.target.value.toUpperCase();
+//   const { widgetsList } = this.state;
 
-  const { widgetsList } = this.state;
+//   const newNodeList = widgetsList.filter((node) => {
+//     return node.nodeName.toUpperCase().indexOf(filter) > -1;
+//   });
 
-  const newNodeList = widgetsList.filter((node) => {
-    return node.nodeName.toUpperCase().indexOf(filter) > -1;
-  });
+//   this.setState({
+//     widgetsFilter: newNodeList,
+//   });
+// };
 
-  this.setState({
-    widgetsFilter: newNodeList,
-  });
-};
-
-const WidgetsPanel = forwardRef((props, ref) => {
+const WidgetsPanel = forwardRef(({ events } = props, ref) => {
   const [widgets, setWidgets] = useState([]);
   const [editor, setEditor] = useState({});
   const [visible, setVisible] = useState(false);
-
-  const [widgetsState, setWidgetsState] = useMergeState({
-    widgetsList: widgets,
-    widgetsFilter: widgets,
-    isWidgetsExpanded: true,
-  });
+  const [container, setContainer] = useState(null);
 
   const nodeRef = React.createRef();
 
@@ -60,14 +48,12 @@ const WidgetsPanel = forwardRef((props, ref) => {
     },
   }));
 
-  const { isWidgetsExpanded, widgetsFilter } = widgetsState;
-
   return (
-    <div className={styles.canvasWidgets}>
+    <div className={styles.canvasWidgets} ref={setContainer}>
       {visible && (
         <>
-          <Affix offsetTop={0}>
-            <WidgetsFilter placeholder="Filter Widgets..." onFilter={onFilterNodeHandler} />
+          <Affix target={() => container}>
+            <WidgetsFilter placeholder="Filter Widgets..." {...events} />
           </Affix>
 
           {widgets.map((item, i) => {

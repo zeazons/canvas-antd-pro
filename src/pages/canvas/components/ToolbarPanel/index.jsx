@@ -31,8 +31,8 @@ import {
 import styles from './assets/less/style.less';
 
 const icons = [
-  faPlus,
   faMinus,
+  faPlus,
   faFolderOpen,
   faEdit,
   faSave,
@@ -48,12 +48,19 @@ const icons = [
 ];
 const ToolbarPanel = forwardRef(({ events } = props, ref) => {
   const [tools, setTools] = useState([]);
+  const [isExpand, setIsExpand] = useState(true);
 
   const { onToolButtonClick } = events;
 
   useImperativeHandle(ref, () => ({
     setData(data) {
       setTools(data);
+    },
+    collapse() {
+      setIsExpand(false);
+    },
+    expand() {
+      setIsExpand(true);
     },
   }));
 
@@ -70,7 +77,37 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
       <Row justify="space-between" align="middle">
         <Col>
           {toolsLeft.map((item, i) => {
-            if (i === 2 || i === 5 || i === 7) {
+            if (i === 0) {
+              return (
+                <>
+                  {item.visibled && isExpand && (
+                    <Tooltip title={item.button}>
+                      <Button
+                        type="text"
+                        icon={<FontAwesomeIcon icon={icons[i]} />}
+                        onClick={(event) => onToolButtonClick(event, item.button)}
+                        key={item.button}
+                      />
+                    </Tooltip>
+                  )}
+                </>
+              );
+            } else if (i === 1) {
+              return (
+                <>
+                  {item.visibled && !isExpand && (
+                    <Tooltip title={item.button}>
+                      <Button
+                        type="text"
+                        icon={<FontAwesomeIcon icon={icons[i]} />}
+                        onClick={(event) => onToolButtonClick(event, item.button)}
+                        key={item.button}
+                      />
+                    </Tooltip>
+                  )}
+                </>
+              );
+            } else if (i === 2 || i === 5 || i === 7) {
               return (
                 <>
                   <Divider type="vertical" key={`divider_${i}`} />

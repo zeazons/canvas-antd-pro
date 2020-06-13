@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { addNode } from '../../../utils/widgetsUtils';
+import { addNode } from '../../utils/widgetsUtils';
 
-import styles from '../../../assets/less/style.less';
+import styles from '../../assets/less/style.less';
 class Icon extends Component {
   constructor(props) {
     super(props);
