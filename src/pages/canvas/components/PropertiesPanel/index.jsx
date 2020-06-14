@@ -14,7 +14,7 @@ import * as NodeConstant from '../../constants/nodeConstant';
 
 import styles from './assets/less/style.less';
 const renderProperties = (value) => {
-  switch (value.nodeType) {
+  switch (value.title) {
     case NodeConstant.NODE_TYPE_CODE:
       return (
         <CodeProperties
@@ -31,29 +31,8 @@ const renderProperties = (value) => {
       return <NoProperties />;
   }
 };
-// const getWidth = (width) => {
-//   let drawerWidth;
-//   switch (width) {
-//     case 'small':
-//       drawerWidth = 576;
-//       break;
-//     case 'medium':
-//       drawerWidth = 768;
-//       break;
-//     case 'large':
-//       drawerWidth = 992;
-//       break;
-
-//     default:
-//       drawerWidth = 576;
-//       break;
-//   }
-//   return drawerWidth;
-// };
 
 const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) => {
-  // const { config, events, children } = props;
-
   const [value, setValue] = useMergeState({ width: 576 }, config);
   const [visible, setVisible] = useState(false);
 
@@ -64,7 +43,9 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
   };
 
   useImperativeHandle(ref, () => ({
-    getData() {},
+    getData() {
+      return { ...value };
+    },
     setData(data) {
       setValue({ ...value, ...data });
     },
@@ -85,9 +66,7 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
         width={width}
         onClose={onDrawerClose}
         visible={visible}
-        // style={{ margin: 0, padding: 0 }}
       >
-        {/* {children} */}
         <div className={styles.contentPropertiesPanel}>{renderProperties(value)}</div>
       </Drawer>
     </>

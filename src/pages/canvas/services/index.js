@@ -8,3 +8,6 @@ export * from './canvas/undoCanvas';
 export * from './canvas/redoCanvas';
 
 export * from './widgets/loadWidgets';
+
+export * from './properties/loadProperty';
+export * from './properties/saveProperty';

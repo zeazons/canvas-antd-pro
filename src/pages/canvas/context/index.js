@@ -41,7 +41,7 @@ export const CanvasContextProvider = (props) => {
         Events.onCanvasSave(refs, value);
       },
       onNodeDblClick: (evt, cell) => {
-        Events.onNodeDblClick(refs, value);
+        Events.onNodeDblClick(refs, value, cell);
       },
       onWidgetsFilter: () => {
         Events.onWidgetsFilter(refs, value);
@@ -50,8 +50,7 @@ export const CanvasContextProvider = (props) => {
         Events.onToolButtonClick(refs, value, topic);
       },
       onSubmit: (event) => {
-        console.log('onSubmit');
-        console.log('event: ', event);
+        Events.onPropertySave(refs, value);
       },
     },
 

@@ -4,7 +4,7 @@ export const onWidgetsFilter = (refs) => {
   console.log('onWidgetsFilter');
 
   const { editor } = refs.current[0].getData();
-  let dataParams = {
+  let requestParams = {
     params: {
       data: {
         search: event.target.value,
@@ -12,5 +12,5 @@ export const onWidgetsFilter = (refs) => {
     },
   };
 
-  Services.loadWidgets(refs, dataParams, editor);
+  Services.loadWidgets(refs, requestParams, editor);
 };

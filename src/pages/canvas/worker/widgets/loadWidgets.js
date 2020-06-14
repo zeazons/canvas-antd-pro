@@ -1,7 +1,7 @@
 import * as Services from '../../services';
 
 export const loadWidgets = (refs, data, editor) => {
-  let dataParams = {
+  let requestParams = {
     params: {
       data: {
         ...data,
@@ -9,5 +9,5 @@ export const loadWidgets = (refs, data, editor) => {
     },
   };
 
-  Services.loadWidgets(refs, dataParams, editor);
+  Services.loadWidgets(refs, requestParams, editor);
 };

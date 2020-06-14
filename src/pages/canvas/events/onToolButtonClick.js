@@ -4,7 +4,7 @@ import * as Services from '../services';
 export const onToolButtonClick = (refs, data, topic) => {
   const { editor } = refs.current[0].getData();
 
-  let dataParams = {
+  let requestParams = {
     params: {
       data: { ...data },
     },
@@ -26,35 +26,35 @@ export const onToolButtonClick = (refs, data, topic) => {
       break;
 
     case 'EditFlow':
-      dataParams.params.data.editing = true;
-      Services.editCanvas(refs, dataParams, editor);
+      requestParams.params.data.editing = true;
+      Services.editCanvas(refs, requestParams, editor);
       break;
 
     case 'SaveFlow':
-      dataParams.params.data.graphModel = FlowUtiles.getXmlGraphModel(editor);
-      Services.saveCanvas(refs, dataParams, editor);
+      requestParams.params.data.graphModel = FlowUtiles.getXmlGraphModel(editor);
+      Services.saveCanvas(refs, requestParams, editor);
       break;
 
     case 'CommitFlow':
-      dataParams.params.data.editing = false;
-      Services.commitCanvas(refs, dataParams, editor);
+      requestParams.params.data.editing = false;
+      Services.commitCanvas(refs, requestParams, editor);
       break;
 
     case 'DiscardFlow':
-      dataParams.params.data.editing = false;
-      Services.discardCanvas(refs, dataParams, editor);
+      requestParams.params.data.editing = false;
+      Services.discardCanvas(refs, requestParams, editor);
       break;
 
     case 'CloseFlow':
-      Services.closeCanvas(refs, dataParams, editor);
+      Services.closeCanvas(refs, requestParams, editor);
       break;
 
     case 'UndoFlow':
-      Services.undoCanvas(refs, dataParams, editor);
+      Services.undoCanvas(refs, requestParams, editor);
       break;
 
     case 'RedoFlow':
-      Services.redoCanvas(refs, dataParams, editor);
+      Services.redoCanvas(refs, requestParams, editor);
       break;
 
     case 'ToggleGuideline':

@@ -3,7 +3,7 @@ import * as FlowUtiles from '../components/FlowPanel/utils/flowUtiles';
 
 export const onCanvasSave = (refs, data) => {
   const { editor } = refs.current[0].getData();
-  const dataParams = {
+  const requestParams = {
     params: {
       data: {
         ...data,
@@ -11,5 +11,5 @@ export const onCanvasSave = (refs, data) => {
       },
     },
   };
-  Services.saveCanvas(refs, dataParams, editor);
+  Services.saveCanvas(refs, requestParams, editor);
 };
