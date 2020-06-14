@@ -24,7 +24,7 @@ const GlobalHeaderRight = (props) => {
 
   return (
     <div className={className}>
-      <HeaderSearch
+      {/* <HeaderSearch
         className={`${styles.action} ${styles.search}`}
         placeholder="Search"
         defaultValue="umi ui"
@@ -48,8 +48,8 @@ const GlobalHeaderRight = (props) => {
         ]} // onSearch={value => {
         //   //console.log('input', value);
         // }}
-      />
-      <Tooltip title="Help">
+      /> */}
+      {/* <Tooltip title="Help">
         <a
           target="_blank"
           href="https://pro.ant.design/docs/getting-started"
@@ -58,7 +58,7 @@ const GlobalHeaderRight = (props) => {
         >
           <QuestionCircleOutlined />
         </a>
-      </Tooltip>
+      </Tooltip> */}
       <NoticeIconView />
       <Avatar menu />
       {REACT_APP_ENV && (
@@ -66,7 +66,7 @@ const GlobalHeaderRight = (props) => {
           <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>
         </span>
       )}
-      <SelectLang className={styles.action} />
+      {/* <SelectLang className={styles.action} /> */}
     </div>
   );
 };

@@ -5,6 +5,9 @@ import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 class AvatarDropdown extends React.Component {
   onMenuClick = (event) => {
     const { key } = event;
@@ -34,7 +37,7 @@ class AvatarDropdown extends React.Component {
     } = this.props;
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        {menu && (
+        {/* {menu && (
           <Menu.Item key="center">
             <UserOutlined />
             Account Center
@@ -46,7 +49,7 @@ class AvatarDropdown extends React.Component {
             Account Settings
           </Menu.Item>
         )}
-        {menu && <Menu.Divider />}
+        {menu && <Menu.Divider />} */}
 
         <Menu.Item key="logout">
           <LogoutOutlined />
@@ -57,7 +60,14 @@ class AvatarDropdown extends React.Component {
     return currentUser && currentUser.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+          <Avatar
+            size="small"
+            className={styles.avatar}
+            // src={currentUser.avatar}
+            icon={<FontAwesomeIcon icon={faUser} color={'#595959'} />}
+            style={{ backgroundColor: '#ececec' }}
+            alt="avatar"
+          />
           <span className={styles.name}>{currentUser.name}</span>
         </span>
       </HeaderDropdown>
