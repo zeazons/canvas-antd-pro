@@ -1,4 +1,4 @@
-import * as Services from '../services';
+import * as Services from '../../services';
 
 export const onNodeDblClick = (refs, data, cell) => {
   const { nodeId, nodeType, systemType, icon } = cell;

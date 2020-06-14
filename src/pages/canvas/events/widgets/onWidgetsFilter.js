@@ -1,4 +1,4 @@
-import * as Services from '../services';
+import * as Services from '../../services';
 
 export const onWidgetsFilter = (refs) => {
   console.log('onWidgetsFilter');

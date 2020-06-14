@@ -1,5 +1,5 @@
 import * as UICommander from '@/uiCommander';
-import * as Services from '../services';
+import * as Services from '../../services';
 
 export const onToolButtonClick = (refs, data, topic) => {
   const { editor } = refs.current[0].getData();

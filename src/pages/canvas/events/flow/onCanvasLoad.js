@@ -1,4 +1,4 @@
-import * as Services from '../services';
+import * as Services from '../../services';
 
 export const onCanvasLoad = (refs, data) => {
   const { editor } = refs.current[0].getData();

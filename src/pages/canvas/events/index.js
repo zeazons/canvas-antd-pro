@@ -1,9 +1,9 @@
-export * from './onCanvasLoad';
-export * from './onCanvasSave';
-export * from './onNodeDblClick';
+export * from './flow/onCanvasLoad';
+export * from './flow/onCanvasSave';
+export * from './flow/onNodeDblClick';
 
-export * from './onWidgetsFilter';
+export * from './widgets/onWidgetsFilter';
 
-export * from './onToolButtonClick';
+export * from './toolbar/onToolButtonClick';
 
-export * from './onPropertySave';
+export * from './properties/onPropertySave';
