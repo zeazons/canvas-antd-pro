@@ -1,4 +1,5 @@
 import React, {
+  Fragment,
   useState,
   useEffect,
   useRef,
@@ -79,7 +80,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
           {toolsLeft.map((item, i) => {
             if (i === 0) {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   {item.visibled && isExpand && (
                     <>
                       <Tooltip title={item.button} key={`tooltip_${item.button}`}>
@@ -93,11 +94,11 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       <Divider type="vertical" key={`divider_${i}`} />
                     </>
                   )}
-                </>
+                </Fragment>
               );
             } else if (i === 1) {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   {item.visibled && !isExpand && (
                     <>
                       <Tooltip title={item.button} key={`tooltip_${item.button}`}>
@@ -111,11 +112,11 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       <Divider type="vertical" key={`divider_${i}`} />
                     </>
                   )}
-                </>
+                </Fragment>
               );
             } else if (i === 2 || i === 5 || i === 7) {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   {item.visibled && (
                     <>
                       <Divider type="vertical" key={`divider_${i}`} />
@@ -129,11 +130,11 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       </Tooltip>
                     </>
                   )}
-                </>
+                </Fragment>
               );
             } else {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   {item.visibled && (
                     <Tooltip title={item.button} key={`tooltip_${item.button}`}>
                       <Button
@@ -144,7 +145,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       />
                     </Tooltip>
                   )}
-                </>
+                </Fragment>
               );
             }
           })}
@@ -153,7 +154,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
           {toolsRight.map((item, i) => {
             if (i === 1) {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   <Divider type="vertical" key={`divider_${i + 9}`} />
                   {item.visibled && (
                     <Tooltip title={item.button} key={`${item.button}`}>
@@ -164,11 +165,11 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       />
                     </Tooltip>
                   )}
-                </>
+                </Fragment>
               );
             } else {
               return (
-                <>
+                <Fragment key={`${i}`}>
                   {item.visibled && (
                     <Tooltip title={item.button} key={`${item.button}`}>
                       <Button
@@ -178,7 +179,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                       />
                     </Tooltip>
                   )}
-                </>
+                </Fragment>
               );
             }
           })}

@@ -40,7 +40,7 @@ const CodeProperties = forwardRef(({ config, events, children } = props, ref) =>
   }));
 
   return (
-    <Tabs tabPosition="right">
+    <Tabs size="large" tabPosition="right">
       <TabPane tab={<FontAwesomeIcon icon={faTools} size="lg" />} key="1">
         {/* <Properties ref={propertiesRef} /> */}
         <Properties />
