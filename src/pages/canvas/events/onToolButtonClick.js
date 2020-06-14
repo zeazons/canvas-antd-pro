@@ -1,12 +1,12 @@
 import * as UICommander from '@/uiCommander';
 import * as Services from '../services';
 
-export const onToolButtonClick = (refs, topic) => {
+export const onToolButtonClick = (refs, data, topic) => {
   const { editor } = refs.current[0].getData();
 
   let dataParams = {
     params: {
-      data: { username: 'Ronaldo', canvasId: '250' },
+      data: { ...data },
     },
   };
 

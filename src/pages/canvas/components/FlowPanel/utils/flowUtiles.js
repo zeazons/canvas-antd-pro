@@ -351,7 +351,7 @@ export const createPopupMenu = (editor, menu, cell, evt) => {
       });
     }
 
-    menu.addSeparator();
+    // menu.addSeparator();
 
     if (!_.isEmpty(cell) && cell.edge) {
       const styleMenu = menu.addItem('Style', ICON_EDGE);
@@ -401,11 +401,11 @@ export const createPopupMenu = (editor, menu, cell, evt) => {
         styleMenu,
       );
 
-      menu.addSeparator();
+      // menu.addSeparator();
     }
 
-    menu.addItem('Print', ICON_PRINT, () => {
-      printFlow(graph);
-    });
+    // menu.addItem('Print', ICON_PRINT, () => {
+    //   printFlow(graph);
+    // });
   }
 };

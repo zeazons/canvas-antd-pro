@@ -6,5 +6,6 @@ export const showProperties = (refs, data) => {
     icon: icon,
     title: nodeType,
     description: systemType,
+    ...data.cell,
   });
 };

@@ -1,7 +1,5 @@
-import React, { createContext } from 'react';
-
-import * as UICommander from '@/uiCommander';
-import * as Services from '../services';
+import React, { useEffect, createContext } from 'react';
+import { connect } from 'umi';
 
 import * as Events from '../events';
 
@@ -12,24 +10,44 @@ export const CanvasContextConsumer = ({ children }) => {
 };
 
 export const CanvasContextProvider = (props) => {
-  const { refs } = props;
+  const { refs, value } = props;
+
+  const { dispatch } = value;
+
+  // if (dispatch) {
+  //   dispatch({
+  //     type: 'user/fetchCurrent',
+  //   });
+  // }
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'user/fetchCurrent',
+      });
+    }
+
+    // setEditor(refs.current[0].getData());
+  }, []);
+
+  // console.log('currentUser: ', currentUser);
 
   const initialState = {
     events: {
       onCanvasLoad: () => {
-        Events.onCanvasLoad(refs);
+        Events.onCanvasLoad(refs, value);
       },
       onCanvasSave: () => {
-        Events.onCanvasSave(refs);
+        Events.onCanvasSave(refs, value);
       },
       onNodeDblClick: (evt, cell) => {
-        Events.onNodeDblClick(refs);
+        Events.onNodeDblClick(refs, value);
       },
       onWidgetsFilter: () => {
-        Events.onWidgetsFilter(refs);
+        Events.onWidgetsFilter(refs, value);
       },
       onToolButtonClick: (event, topic) => {
-        Events.onToolButtonClick(refs, topic);
+        Events.onToolButtonClick(refs, value, topic);
       },
       onSubmit: (event) => {
         console.log('onSubmit');
@@ -42,3 +60,7 @@ export const CanvasContextProvider = (props) => {
 
   return <CanvasContext.Provider value={initialState}>{props.children}</CanvasContext.Provider>;
 };
+
+export default connect(({ user }) => ({
+  currentUser: user.currentUser,
+}))(CanvasContextProvider);

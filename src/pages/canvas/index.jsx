@@ -1,39 +1,20 @@
 import React, { useEffect, useState, useContext, useRef, forwardRef } from 'react';
-import { Button } from 'antd';
 
-import * as UICommander from '@/uiCommander';
-import * as Services from './services';
+import { useParams } from 'react-router-dom';
+
+import * as ValidationUtils from '@/common/utils/validationUtils';
 import * as NodeConstant from './constants/nodeConstant';
 
-import { CanvasContext, CanvasContextProvider, CanvasContextConsumer } from './context';
+import { CanvasContextProvider, CanvasContextConsumer } from './context';
 
 import FlowPanel from './components/FlowPanel';
 import WidgetsPanel from './components/WidgetsPanel';
 import ToolbarPanel from './components/ToolbarPanel';
 import PropertiesPanel from './components/PropertiesPanel';
 
-import NoProperties from './components/properties/NoProperties';
-import CodeProperties from './components/properties/CodeProperties';
+import * as Events from './events';
 
 import styles from './assets/less/style.less';
-
-const renderProperties = (props, nodeData) => {
-  switch (nodeData.nodeType) {
-    case NodeConstant.NODE_TYPE_CODE:
-      return (
-        <CodeProperties
-          {...props}
-          nodeType={nodeData.nodeType}
-          nodeId={nodeData.nodeId}
-          nodeName={nodeData.nodeName}
-          group={nodeData.group}
-        />
-      );
-
-    default:
-      return <NoProperties />;
-  }
-};
 
 const propertirsPanelConfig = {
   width: 576,
@@ -45,27 +26,18 @@ const Canvas = (props) => {
 
   const refs = useRef(Array.from({ length: 4 }, (objRef) => React.createRef()));
 
-  const onWidgetsFilter = (event) => {
-    const { editor } = refs.current[0].getData();
-    let dataParams = {
-      params: {
-        data: {
-          search: event.target.value,
-        },
-      },
-    };
-
-    Services.loadWidgets(refs, dataParams, editor);
-  };
+  const { dispatch, currentUser } = props;
+  let { id } = useParams();
 
   useEffect(() => {
     setEditor(refs.current[0].getData());
+    Events.onCanvasLoad(refs, { canvasId: id, username: 'Ronaldo' });
   }, []);
 
   return (
-    <CanvasContextProvider refs={refs}>
+    <CanvasContextProvider value={{ canvasId: id, username: 'Ronaldo' }} refs={refs}>
       <CanvasContextConsumer>
-        {({ events } = context) => {
+        {({ events, username } = context) => {
           return (
             <>
               <FlowPanel events={events} ref={(el) => (refs.current[0] = el)} />
@@ -89,7 +61,7 @@ const Canvas = (props) => {
                 events={events}
                 ref={(el) => (refs.current[3] = el)}
               >
-                {renderProperties(props, nodeProperties)}
+                {/* {renderProperties(props, nodeProperties)} */}
               </PropertiesPanel>
             </>
           );

@@ -7,6 +7,30 @@ import { Drawer } from 'antd';
 import Title from './components/Title';
 import Footer from './components/Footer';
 
+import NoProperties from '../properties/NoProperties';
+import CodeProperties from '../properties/CodeProperties';
+
+import * as NodeConstant from '../../constants/nodeConstant';
+
+import styles from './assets/less/style.less';
+const renderProperties = (value) => {
+  switch (value.nodeType) {
+    case NodeConstant.NODE_TYPE_CODE:
+      return (
+        <CodeProperties
+        // config={{ ...value }}
+        // {...value}
+        // nodeType={value.nodeType}
+        // nodeId={value.nodeId}
+        // nodeName={value.nodeName}
+        // // group={nodeData.group}
+        />
+      );
+
+    default:
+      return <NoProperties />;
+  }
+};
 // const getWidth = (width) => {
 //   let drawerWidth;
 //   switch (width) {
@@ -29,6 +53,7 @@ import Footer from './components/Footer';
 
 const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) => {
   // const { config, events, children } = props;
+
   const [value, setValue] = useMergeState({ width: 576 }, config);
   const [visible, setVisible] = useState(false);
 
@@ -60,8 +85,10 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
         width={width}
         onClose={onDrawerClose}
         visible={visible}
+        // style={{ margin: 0, padding: 0 }}
       >
-        {children}
+        {/* {children} */}
+        <div className={styles.contentPropertiesPanel}>{renderProperties(value)}</div>
       </Drawer>
     </>
   );

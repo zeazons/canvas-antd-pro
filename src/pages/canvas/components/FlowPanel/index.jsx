@@ -73,7 +73,6 @@ const FlowPanel = forwardRef(({ events }, ref) => {
 
     events.setFlowState = setFlowState;
     Events.onInitailFlow(refs, extraParams, events);
-    events.onCanvasLoad();
   }, []);
 
   return (

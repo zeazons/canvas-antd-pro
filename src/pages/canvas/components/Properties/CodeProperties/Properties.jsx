@@ -1,12 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Tabs, Form, Button } from 'antd';
+import { Form, Button } from 'antd';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTools, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-
-import Properties from './Properties';
-
-const { TabPane } = Tabs;
+import TextAreaWithLabel from './components/form/TextAreaWithLabel';
 
 const layout = {
   labelCol: { span: 24 },
@@ -40,15 +35,17 @@ const CodeProperties = forwardRef(({ config, events, children } = props, ref) =>
   }));
 
   return (
-    <Tabs tabPosition="right">
-      <TabPane tab={<FontAwesomeIcon icon={faTools} size="lg" />} key="1">
-        {/* <Properties ref={propertiesRef} /> */}
-        <Properties />
-      </TabPane>
-      <TabPane tab={<FontAwesomeIcon icon={faInfoCircle} size="lg" />} key="2">
-        informarion
-      </TabPane>
-    </Tabs>
+    <Form
+      {...layout}
+      name="basic"
+      initialValues={{
+        codeString: true,
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
+      <TextAreaWithLabel label="Code Editor" name="codeString" rows="8" />
+    </Form>
   );
 });
 

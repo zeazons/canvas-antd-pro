@@ -86,6 +86,11 @@ export default defineConfig({
               path: '/canvas/:id',
               component: './canvas',
             },
+            // {
+            //   name: 'canvas',
+            //   path: '/canvas/:id',
+            //   component: './canvas',
+            // },
           ],
         },
         {
@@ -96,14 +101,25 @@ export default defineConfig({
           routes: [
             // {
             //   path: '/canvas',
-            //   icon: 'table',
-            //   name: 'canvas',
+            //   component: '../layouts/BlankLayout',
+            //   Routes: ['src/pages/Authorized'],
+            //   authority: ['admin', 'user'],
             //   routes: [
             //     {
             //       name: 'canvas',
-            //       path: '/canvas/:id',
-            //       component: './Canvas',
+            //       path: '/canvas',
+            //       component: './404',
             //     },
+            //     {
+            //       name: 'canvas',
+            //       path: '/canvas/:id',
+            //       component: './canvas',
+            //     },
+            //     // {
+            //     //   name: 'canvas',
+            //     //   path: '/canvas/:id',
+            //     //   component: './canvas',
+            //     // },
             //   ],
             // },
             {
