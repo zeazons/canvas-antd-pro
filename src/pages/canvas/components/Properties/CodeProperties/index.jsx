@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import { Tabs, Form, Button } from 'antd';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,20 +30,25 @@ const CodeProperties = forwardRef(({ config, events, children } = props, ref) =>
     console.log('Failed:', errorInfo);
   };
 
+  const refs = useRef(Array.from({ length: 1 }, (objRef) => React.createRef()));
+
   useImperativeHandle(ref, () => ({
-    setValues(data) {
-      setValuesHandle(data);
+    getData() {
+      return refs.current[0].getData();
     },
-    getValues(data) {
-      getValuesHandle(data);
-    },
+    // setValues(data) {
+    //   setValuesHandle(data);
+    // },
+    // getValues(data) {
+    //   getValuesHandle(data);
+    // },
   }));
 
   return (
     <Tabs size="large" tabPosition="right">
       <TabPane tab={<FontAwesomeIcon icon={faTools} size="lg" />} key="1">
         {/* <Properties ref={propertiesRef} /> */}
-        <Properties />
+        <Properties config={config} ref={(el) => (refs.current[0] = el)} />
       </TabPane>
       <TabPane tab={<FontAwesomeIcon icon={faInfoCircle} size="lg" />} key="2">
         informarion

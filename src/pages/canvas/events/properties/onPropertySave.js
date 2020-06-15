@@ -15,13 +15,15 @@ const transformData = (data) => {
 
 export const onPropertySave = (refs, extraParams) => {
   const nodeProperties = refs.current[3].getData();
-  const data = transformData(nodeProperties);
 
+  const data = transformData(nodeProperties);
   const requestParams = {
     params: {
       data: { ...extraParams, ...data },
     },
   };
 
-  Services.saveProperty(refs, requestParams);
+  Services.saveProperty(refs, requestParams, {}, () => {
+    refs.current[3].close();
+  });
 };

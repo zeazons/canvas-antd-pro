@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import useMergeState from 'use-merge-value';
 
@@ -13,17 +13,20 @@ import CodeProperties from '../properties/CodeProperties';
 import * as NodeConstant from '../../constants/nodeConstant';
 
 import styles from './assets/less/style.less';
-const renderProperties = (value) => {
+const renderProperties = (refs, value) => {
+  const { nodeProperty } = value;
+
   switch (value.title) {
     case NodeConstant.NODE_TYPE_CODE:
       return (
         <CodeProperties
-        // config={{ ...value }}
-        // {...value}
-        // nodeType={value.nodeType}
-        // nodeId={value.nodeId}
-        // nodeName={value.nodeName}
-        // // group={nodeData.group}
+          config={{ ...nodeProperty }}
+          ref={(el) => (refs.current[0] = el)}
+          // {...value}
+          // nodeType={value.nodeType}
+          // nodeId={value.nodeId}
+          // nodeName={value.nodeName}
+          // // group={nodeData.group}
         />
       );
 
@@ -44,7 +47,13 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
 
   useImperativeHandle(ref, () => ({
     getData() {
-      return { ...value };
+      switch (value.title) {
+        case NodeConstant.NODE_TYPE_CODE:
+          return { ...value, nodeProperty: refs.current[0].getData() };
+
+        default:
+          break;
+      }
     },
     setData(data) {
       setValue({ ...value, ...data });
@@ -57,6 +66,8 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
     },
   }));
 
+  const refs = useRef(Array.from({ length: 1 }, (objRef) => React.createRef()));
+
   return (
     <>
       <Drawer
@@ -67,7 +78,7 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
         onClose={onDrawerClose}
         visible={visible}
       >
-        <div className={styles.contentPropertiesPanel}>{renderProperties(value)}</div>
+        <div className={styles.contentPropertiesPanel}>{renderProperties(refs, value)}</div>
       </Drawer>
     </>
   );

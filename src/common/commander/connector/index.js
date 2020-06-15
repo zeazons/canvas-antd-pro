@@ -34,7 +34,10 @@ const connectCommander = (refs, requestData, extraParams, callback) => {
         // console.log('| === Extract Data === |');
         // console.log('response: ', response);
         // Commander.receive(response);
-        Commander.receive(refs, response, extraParams, callback);
+        Commander.receive(refs, response, extraParams);
+        if (callback) {
+          callback();
+        }
 
         return response;
       }

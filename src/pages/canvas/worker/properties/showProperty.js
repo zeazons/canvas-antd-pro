@@ -17,8 +17,9 @@ const transformData = (data) => {
 };
 
 export const showProperty = (refs, extraParams) => {
-  const nodeProperties = { nodeId: extraParams.nodeId, ...extraParams.nodeProperty };
-  const data = transformData(nodeProperties);
+  // const nodeProperties = { nodeId: extraParams.nodeId, ...extraParams.nodeProperty };
+  // const nodeProperties = { nodeId: extraParams.nodeId, ...extraParams.nodeProperty };
+  const data = transformData(extraParams);
 
   refs.current[3].setData(data);
 };
