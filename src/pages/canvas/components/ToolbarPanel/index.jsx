@@ -17,7 +17,7 @@ import {
   faFolderOpen,
   faEdit,
   faSave,
-  // faCheckCircle,
+  faCheckCircle,
   faHistory,
   faTimesCircle,
   faUndoAlt,
@@ -37,6 +37,7 @@ const icons = [
   faFolderOpen,
   faEdit,
   faSave,
+  faCheckCircle,
   faHistory,
   faTimesCircle,
   faUndoAlt,
@@ -66,11 +67,11 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
   }));
 
   const toolsLeft = tools.filter((item, i) => {
-    return i < 9;
+    return i < 10;
   });
 
   const toolsRight = tools.filter((item, i) => {
-    return i >= 9;
+    return i >= 10;
   });
 
   return (
@@ -114,7 +115,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                   )}
                 </Fragment>
               );
-            } else if (i === 2 || i === 5 || i === 7) {
+            } else if (i === 2 || i === 5 || i === 8) {
               return (
                 <Fragment key={`${i}`}>
                   {item.visibled && (
@@ -155,12 +156,12 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
             if (i === 1) {
               return (
                 <Fragment key={`${i}`}>
-                  <Divider type="vertical" key={`divider_${i + 9}`} />
+                  <Divider type="vertical" key={`divider_${i + 10}`} />
                   {item.visibled && (
                     <Tooltip title={item.button} key={`${item.button}`}>
                       <Button
                         type="text"
-                        icon={<FontAwesomeIcon icon={icons[i + 9]} />}
+                        icon={<FontAwesomeIcon icon={icons[i + 10]} />}
                         onClick={(event) => onToolButtonClick(event, item.button)}
                       />
                     </Tooltip>
@@ -174,7 +175,7 @@ const ToolbarPanel = forwardRef(({ events } = props, ref) => {
                     <Tooltip title={item.button} key={`${item.button}`}>
                       <Button
                         type="text"
-                        icon={<FontAwesomeIcon icon={icons[i + 9]} />}
+                        icon={<FontAwesomeIcon icon={icons[i + 10]} />}
                         onClick={(event) => onToolButtonClick(event, item.button)}
                       />
                     </Tooltip>

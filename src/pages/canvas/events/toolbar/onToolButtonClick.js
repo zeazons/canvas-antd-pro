@@ -1,6 +1,8 @@
 import * as UICommander from '@/uiCommander';
 import * as Services from '../../services';
 
+import * as FlowUtiles from '../../components/FlowPanel/utils/flowUtiles';
+
 export const onToolButtonClick = (refs, data, topic) => {
   const { editor } = refs.current[0].getData();
 

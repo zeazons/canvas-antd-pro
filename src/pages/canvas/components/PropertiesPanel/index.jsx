@@ -14,9 +14,9 @@ import * as NodeConstant from '../../constants/nodeConstant';
 
 import styles from './assets/less/style.less';
 const renderProperties = (refs, value) => {
-  const { nodeProperty } = value;
+  const { title: nodeType, nodeProperty } = value;
 
-  switch (value.title) {
+  switch (nodeType) {
     case NodeConstant.NODE_TYPE_CODE:
       return (
         <CodeProperties
@@ -35,6 +35,18 @@ const renderProperties = (refs, value) => {
   }
 };
 
+const getNodeProperties = (refs, value) => {
+  const { title: nodeType } = value;
+
+  switch (nodeType) {
+    case NodeConstant.NODE_TYPE_CODE:
+      return { ...value, nodeProperty: refs.current[0].getData() };
+
+    default:
+      return { ...value };
+  }
+};
+
 const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) => {
   const [value, setValue] = useMergeState({ width: 576 }, config);
   const [visible, setVisible] = useState(false);
@@ -47,13 +59,7 @@ const PropertiesPanel = forwardRef(({ config, events, children } = props, ref) =
 
   useImperativeHandle(ref, () => ({
     getData() {
-      switch (value.title) {
-        case NodeConstant.NODE_TYPE_CODE:
-          return { ...value, nodeProperty: refs.current[0].getData() };
-
-        default:
-          break;
-      }
+      return getNodeProperties(refs, value);
     },
     setData(data) {
       setValue({ ...value, ...data });

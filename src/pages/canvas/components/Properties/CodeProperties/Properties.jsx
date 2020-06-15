@@ -23,7 +23,7 @@ const CodeProperties = forwardRef(({ config, events, children } = props, ref) =>
 
   return (
     <Form {...layout} name="basic" form={form}>
-      <TextAreaWithLabel label="Code Editor" name="codeString" rows="8" />
+      <TextAreaWithLabel label="Code Editor" name="codeString" rows="8" focus />
     </Form>
   );
 });

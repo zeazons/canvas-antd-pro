@@ -1,7 +1,4 @@
 export const execute = (ref, data, extraParams, callback) => {
-  console.log('this: ', this);
-  console.log('data: ', data);
-
   data.forEach((item) => {
     const fnName = item.name;
     const value = item.params;

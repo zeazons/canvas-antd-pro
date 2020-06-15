@@ -1,10 +1,10 @@
 import * as Services from '../../services';
-
 import * as Node from './node';
 
 const transformData = (data) => {
-  const { title } = data;
-  switch (title) {
+  const { title: nodeType } = data;
+
+  switch (nodeType) {
     case 'CODE':
       return Node.transformCodeNode(data);
 
